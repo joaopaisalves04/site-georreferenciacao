@@ -16,7 +16,7 @@ proj4.defs("EPSG:3763",
   "+proj=tmerc +lat_0=39.6682583333333 +lon_0=-8.13310833333333 +k=1 +x_0=0 +y_0=0 " +
   "+ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
 
-let mapa, camadaDesenho, camadaVertices, camadaRgg, camadaPosicao;
+let mapa, camadaDesenho, camadaVertices, camadaLados, camadaRgg, camadaPosicao;
 let pontos = [];           // [[lat, lng], ...]
 let aDesenhar = false;
 let pedidoRgg = 0;
@@ -180,6 +180,7 @@ function criarMapa() {
     },
   });
   camadaDesenho = L.polygon([], { color: "#ff6b2c", weight: 4, fillColor: "#ff6b2c", fillOpacity: 0.2, interactive: false }).addTo(mapa);
+  camadaLados = L.layerGroup().addTo(mapa);
   camadaVertices = L.layerGroup().addTo(mapa);
   camadaPosicao = L.layerGroup().addTo(mapa);
 
@@ -232,6 +233,24 @@ async function carregarRgg() {
 
 // ---------- Desenho ----------
 
+// Escreve o comprimento de cada lado a meio do lado (ex.: "48 m").
+function desenharLados() {
+  camadaLados.clearLayers();
+  const n = pontos.length;
+  if (n < 2) return;
+  const lados = n === 2 ? 1 : n;
+  for (let i = 0; i < lados; i++) {
+    const a = L.latLng(pontos[i]);
+    const b = L.latLng(pontos[(i + 1) % n]);
+    const meio = L.latLng((a.lat + b.lat) / 2, (a.lng + b.lng) / 2);
+    L.marker(meio, {
+      interactive: false,
+      keyboard: false,
+      icon: L.divIcon({ className: "medida-lado", html: `<span>${fmt(a.distanceTo(b))} m</span>`, iconSize: null }),
+    }).addTo(camadaLados);
+  }
+}
+
 function atualizar() {
   camadaDesenho.setLatLngs(pontos);
   camadaVertices.clearLayers();
@@ -244,11 +263,13 @@ function atualizar() {
     m.on("drag", (e) => {
       pontos[i] = [e.latlng.lat, e.latlng.lng];
       camadaDesenho.setLatLngs(pontos);
+      desenharLados();
       mostrarMedidas();
     });
     m.on("dragend", () => { guardar(); atualizar(); });
     m.addTo(camadaVertices);
   });
+  desenharLados();
   mostrarMedidas();
   guardar();
 }
