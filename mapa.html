@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1c2433">
+  <title>Esboço do terreno no mapa · Terreno em Ordem (versão de teste)</title>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="vendor/leaflet/leaflet.js" defer></script>
+  <script src="vendor/proj4/proj4.js" defer></script>
+  <script src="js/comum.js" defer></script>
+  <script src="js/locais.js" defer></script>
+  <script src="js/mapa.js" defer></script>
+</head>
+<body>
+<!-- cabecalho -->
+  <a class="saltar" href="#conteudo">Saltar para o conteúdo</a>
+  <div class="aviso-topo" role="note">
+    Serviço privado e independente. Não pertence ao Estado nem ao BUPi.
+    Site oficial: <a href="https://bupi.gov.pt">bupi.gov.pt</a>
+  </div>
+
+  <header class="cabecalho">
+    <div class="contentor">
+      <a class="marca" href="index.html">
+        <svg viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#1f3a5f"/>
+          <path d="M9 27 L14 11 L29 9 L32 24 L19 31 Z" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle cx="9" cy="27" r="2.6" fill="#f2a27c"/><circle cx="14" cy="11" r="2.6" fill="#f2a27c"/>
+          <circle cx="29" cy="9" r="2.6" fill="#f2a27c"/><circle cx="32" cy="24" r="2.6" fill="#f2a27c"/>
+          <circle cx="19" cy="31" r="2.6" fill="#f2a27c"/>
+        </svg>
+        Terreno em Ordem
+      </a>
+      <span class="etiqueta-teste">Versão de teste</span>
+    </div>
+    <nav class="menu contentor" aria-label="Menu principal">
+      <a href="index.html">Início</a>
+      <a href="diagnostico.html">Diagnóstico</a>
+      <a href="mapa.html" aria-current="page">Mapa</a>
+      <a href="perguntas.html">Perguntas</a>
+      <a href="glossario.html">Glossário</a>
+      <a href="ajuda.html">Pedir ajuda</a>
+    </nav>
+  </header>
+  <!-- /cabecalho -->
+
+  <main id="conteudo">
+    <div class="contentor">
+      <h1>Esboço do terreno no mapa</h1>
+
+      <div class="caixa caixa-aviso aviso-esboco" role="note">
+        <strong>Isto é só um esboço.</strong> Não é uma RGG, não fica registado em lado nenhum
+        e não tem valor legal. Serve para se preparar: perceber onde fica o terreno, a área aproximada
+        e levar o desenho ao balcão ou carregá-lo na plataforma do BUPi.
+      </div>
+
+      <div class="mapa-grelha">
+        <div class="mapa-coluna">
+          <div id="mapa" role="application" aria-label="Mapa para desenhar o terreno"></div>
+          <p id="aviso-rgg" class="nota-mapa" hidden>Aproxime mais o mapa (zoom) para ver os terrenos já identificados.</p>
+          <p id="estado-rgg" class="nota-mapa" aria-live="polite"></p>
+        </div>
+
+        <div class="painel">
+          <section class="cartao passo-mapa">
+            <h2><span class="passo-numero">1</span> Encontre o terreno</h2>
+            <label for="procurar-local">Concelho ou freguesia</label>
+            <input type="text" id="procurar-local" autocomplete="off" placeholder="Por exemplo: Lousã">
+            <ul id="resultados-local" class="opcoes opcoes-compactas"></ul>
+            <div class="botoes botoes-compactos">
+              <button type="button" id="gps-ir" class="botao-secundario">📍 Estou no terreno</button>
+            </div>
+            <p id="estado-gps" class="ajuda" aria-live="polite"></p>
+            <label class="opcao-marcar opcao-pequena">
+              <input type="checkbox" id="ver-rgg">
+              <span>Mostrar terrenos vizinhos já identificados no BUPi</span>
+            </label>
+          </section>
+
+          <section class="cartao passo-mapa">
+            <h2><span class="passo-numero">2</span> Marque os cantos</h2>
+            <p id="instrucao" class="ajuda">Carregue em «Começar a desenhar».</p>
+            <div class="botoes botoes-compactos">
+              <button type="button" id="comecar">✏️ Começar a desenhar</button>
+              <button type="button" id="terminar" hidden>✓ Terminar desenho</button>
+              <button type="button" id="desfazer" class="botao-secundario">↶ Desfazer último</button>
+              <button type="button" id="apagar" class="botao-secundario">Apagar tudo</button>
+            </div>
+            <p class="ajuda">No terreno, com o telemóvel, também pode ir a cada canto e carregar em:</p>
+            <button type="button" id="gps-canto" class="botao-secundario">📍 Marcar o canto onde estou</button>
+            <p id="n-pontos" class="estado"></p>
+            <p id="aviso-cruza" class="caixa caixa-aviso" hidden>Os lados do desenho cruzam-se.
+              Marque os cantos pela ordem, à volta do terreno, ou arraste-os para corrigir.</p>
+            <p id="aviso-sobrepoe" class="caixa caixa-aviso" hidden></p>
+          </section>
+
+          <section class="cartao passo-mapa">
+            <h2><span class="passo-numero">3</span> Área e comparação</h2>
+            <div class="custo custo-destaque">
+              <span class="valor" id="area">—</span>
+              <span class="rotulo" id="area-ha">Marque pelo menos 3 cantos</span>
+            </div>
+            <label for="area-caderneta" class="espaco-topo">Área que aparece na caderneta (opcional)</label>
+            <div class="linha-campos">
+              <input type="text" id="area-caderneta" inputmode="decimal" placeholder="Ex.: 2500">
+              <select id="unidade-caderneta" aria-label="Unidade da área">
+                <option value="m2">m²</option>
+                <option value="ha">hectares</option>
+              </select>
+            </div>
+            <div id="comparacao" aria-live="polite"></div>
+          </section>
+
+          <section class="cartao passo-mapa">
+            <h2><span class="passo-numero">4</span> Guardar o desenho</h2>
+            <label for="nome-terreno">Nome para o ficheiro (opcional)</label>
+            <input type="text" id="nome-terreno" placeholder="Ex.: Pinhal da Ribeira" maxlength="60">
+            <div class="botoes botoes-compactos">
+              <button type="button" id="exportar">⬇ Descarregar ficheiro KML</button>
+            </div>
+            <p class="ajuda">O ficheiro KML abre no Google Earth e pode ser carregado na plataforma do BUPi
+              como ponto de partida. O desenho fica também guardado neste aparelho (não é enviado para
+              nenhum servidor).</p>
+          </section>
+        </div>
+      </div>
+
+      <h2>Antes de usar o desenho</h2>
+      <ul class="lista-cuidados">
+        <li>As fotografias aéreas podem ter alguns metros de desvio. Confirme os cantos no terreno sempre que puder.</li>
+        <li>Não inclua caminhos, estradas ou ribeiras dentro do desenho: isso leva à recusa da RGG ou a um ajuste
+          automático. <span class="fonte">Fonte: <a href="https://bupi.gov.pt/pt/perguntas-frequentes">BUPi, Perguntas frequentes</a></span></li>
+        <li>Os terrenos vizinhos mostrados vêm dos dados abertos do BUPi e podem não estar completos nem atualizados.</li>
+      </ul>
+    </div>
+  </main>
+
+<!-- rodape -->
+  <footer>
+    <div class="contentor">
+      <p><strong>Terreno em Ordem</strong> é um serviço privado e independente, sem ligação ao Estado nem ao BUPi.
+        Não faz, não valida e não regista a identificação de terrenos.</p>
+      <p>Valores legais verificados em <span data-data-verificacao>novembro de 2026</span>.
+        Informação orientativa: não substitui o atendimento do BUPi ou da câmara municipal.</p>
+      <p class="rodape-links">
+        <a href="sobre.html">Sobre este site</a>
+        <a href="privacidade.html">Privacidade</a>
+        <a href="https://bupi.gov.pt">Site oficial do BUPi</a>
+      </p>
+    </div>
+  </footer>
+  <!-- /rodape -->
+</body>
+</html>
