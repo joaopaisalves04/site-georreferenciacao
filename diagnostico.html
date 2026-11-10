@@ -4,56 +4,79 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Diagnóstico: o meu terreno (versão de teste)</title>
+  <meta name="theme-color" content="#1c2433">
+  <title>Diagnóstico do terreno · Terreno em Ordem (versão de teste)</title>
   <link rel="stylesheet" href="css/estilo.css">
   <script src="js/comum.js" defer></script>
   <script src="js/diagnostico.js" defer></script>
 </head>
 <body>
   <div class="aviso-topo" role="note">
-    <strong>Versão de teste.</strong> Este é um serviço privado e independente.
-    Não pertence ao Estado nem ao BUPi.
+    Serviço privado e independente. Não pertence ao Estado nem ao BUPi.
     Site oficial: <a href="https://bupi.gov.pt">bupi.gov.pt</a>
   </div>
 
+  <header class="cabecalho">
+    <div class="contentor">
+      <a class="marca" href="index.html">
+        <svg viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#1f3a5f"/>
+          <path d="M9 27 L14 11 L29 9 L32 24 L19 31 Z" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle cx="9" cy="27" r="2.6" fill="#f2a27c"/><circle cx="14" cy="11" r="2.6" fill="#f2a27c"/>
+          <circle cx="29" cy="9" r="2.6" fill="#f2a27c"/><circle cx="32" cy="24" r="2.6" fill="#f2a27c"/>
+          <circle cx="19" cy="31" r="2.6" fill="#f2a27c"/>
+        </svg>
+        Terreno em Ordem
+      </a>
+      <span class="etiqueta-teste">Versão de teste</span>
+    </div>
+  </header>
+
   <main>
-    <p><a href="index.html">← Voltar ao início</a></p>
+    <div class="contentor contentor-estreito">
+      <a class="voltar" href="index.html">← Início</a>
 
-    <!-- Pergunta 1: concelho -->
-    <section id="passo-concelho">
-      <p class="fonte">Pergunta 1</p>
-      <h1>Em que concelho fica o terreno?</h1>
+      <!-- Pergunta 1: concelho -->
+      <section id="passo-concelho" class="cartao">
+        <div class="progresso">
+          <span class="progresso-texto">Pergunta 1 de 5</span>
+          <div class="progresso-barra" aria-hidden="true"><span style="width: 20%"></span></div>
+        </div>
 
-      <label for="campo-concelho">Escreva as primeiras letras do concelho</label>
-      <input type="text" id="campo-concelho" autocomplete="off"
-             aria-describedby="ajuda-concelho" aria-controls="lista-concelhos">
-      <p id="ajuda-concelho" class="ajuda">Por exemplo: "Lou" para Lousã ou Loures.
-        Depois toque no nome certo.</p>
+        <h1>Em que concelho fica o terreno?</h1>
 
-      <p id="estado-pesquisa" aria-live="polite"></p>
-      <ul id="lista-concelhos" class="opcoes"></ul>
-    </section>
+        <label for="campo-concelho">Escreva as primeiras letras do concelho</label>
+        <input type="text" id="campo-concelho" autocomplete="off" placeholder="Por exemplo: Lousã"
+               aria-describedby="ajuda-concelho" aria-controls="lista-concelhos">
+        <p id="ajuda-concelho" class="ajuda">Depois toque no nome certo na lista que aparece.</p>
 
-    <!-- Resultado (preenchido pelo JavaScript) -->
-    <section id="resultado" hidden>
-      <h1 id="resultado-titulo" tabindex="-1"></h1>
-      <div id="resultado-corpo"></div>
-      <div class="acoes">
-        <button type="button" id="mudar-concelho" class="botao-secundario">Escolher outro concelho</button>
-        <a class="botao botao-secundario" href="index.html">Voltar ao início</a>
-      </div>
-      <p class="caixa">As próximas perguntas (tipo de terreno, documentos, objetivo)
-        ainda estão a ser preparadas.</p>
-    </section>
+        <p id="estado-pesquisa" class="estado" aria-live="polite"></p>
+        <ul id="lista-concelhos" class="opcoes"></ul>
+      </section>
 
-    <noscript>
-      <p class="caixa caixa-aviso">Esta página precisa de JavaScript ligado no browser.</p>
-    </noscript>
+      <!-- Resultado (preenchido pelo JavaScript) -->
+      <section id="resultado" class="cartao" hidden>
+        <div id="resultado-selo"></div>
+        <h1 id="resultado-titulo" tabindex="-1"></h1>
+        <div id="resultado-corpo"></div>
+        <div class="botoes">
+          <button type="button" id="mudar-concelho" class="botao-secundario">← Escolher outro concelho</button>
+        </div>
+        <p class="caixa">As próximas perguntas (tipo de terreno, documentos e objetivo)
+          estão a ser preparadas.</p>
+      </section>
+
+      <noscript>
+        <p class="caixa caixa-aviso">Esta página precisa de JavaScript ligado no browser.</p>
+      </noscript>
+    </div>
   </main>
 
   <footer>
-    Valores legais verificados em <span data-data-verificacao>novembro de 2026</span>.
-    Esta informação é orientativa e não substitui o atendimento do BUPi ou da câmara municipal.
+    <div class="contentor">
+      <p>Valores legais verificados em <span data-data-verificacao>novembro de 2026</span>.</p>
+      <p>Informação orientativa: não substitui o atendimento do BUPi ou da câmara municipal.</p>
+    </div>
   </footer>
 </body>
 </html>

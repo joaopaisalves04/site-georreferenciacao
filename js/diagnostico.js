@@ -52,7 +52,7 @@ function mostrarSugestoes() {
     const li = document.createElement("li");
     const b = document.createElement("button");
     b.type = "button";
-    b.innerHTML = `${c.nome}<span class="local">${c.local}</span>`;
+    b.innerHTML = `<span>${c.nome}<span class="local">${c.local}</span></span>`;
     b.addEventListener("click", () => mostrarResultado(c));
     li.appendChild(b);
     lista.appendChild(li);
@@ -69,37 +69,41 @@ function mostrarResultado(c) {
   const ilhas = /Açores|Madeira/.test(c.local);
   const fonte = ilhas ? FONTES.ilhas : FONTES.continente;
 
+  const selo = document.getElementById("resultado-selo");
+
   if (c.sem_cadastro) {
+    selo.innerHTML = `<span class="selo selo-ok">✓ Concelho abrangido pelo BUPi</span>`;
     titulo.textContent = `${c.nome}: o terreno identifica-se no BUPi`;
     corpo.innerHTML = `
-      <div class="caixa caixa-ok">
-        <p><strong>${c.nome}</strong> (${c.local}) é um dos concelhos sem cadastro.
-          Por isso, os terrenos <strong>rústicos e mistos</strong> identificam-se no BUPi.
-          Essa identificação chama-se <strong>RGG</strong> (Representação Gráfica Georreferenciada):
-          é um desenho dos limites do terreno sobre o mapa.</p>
-      </div>
+      <p><strong>${c.nome}</strong> (${c.local}) é um dos concelhos sem cadastro.
+        Por isso, os terrenos <strong>rústicos e mistos</strong> identificam-se no BUPi.</p>
+      <p>Essa identificação chama-se <strong>RGG</strong> (Representação Gráfica Georreferenciada):
+        é um desenho dos limites do terreno sobre o mapa.</p>
       <h2>Quanto custa</h2>
-      <ul>
-        <li><strong>Online, feita por si:</strong> <span data-valor="rgg_online">grátis</span>.</li>
-        <li><strong>No balcão BUPi, com um técnico:</strong>
-          <span data-valor="rgg_balcao_ate_9">ver tabela de custos</span> por terreno
-          (a partir do 10.º terreno do mesmo contribuinte:
-          <span data-valor="rgg_balcao_desde_10">ver tabela de custos</span>).</li>
-      </ul>
+      <div class="custos">
+        <div class="custo custo-destaque">
+          <span class="valor" data-valor="rgg_online">grátis</span>
+          <span class="rotulo">Online, feita por si</span>
+        </div>
+        <div class="custo">
+          <span class="valor" data-valor="rgg_balcao_ate_9">—</span>
+          <span class="rotulo">No balcão, com técnico, por terreno
+            (a partir do 10.º: <span data-valor="rgg_balcao_desde_10">—</span>)</span>
+        </div>
+      </div>
       <p class="caixa caixa-aviso"><strong>Atenção:</strong> se o prédio for só urbano
         (por exemplo, só uma casa), o BUPi não se aplica.</p>
       <p class="fonte">Fonte: <a href="${fonte.url}">${fonte.texto}</a>.</p>`;
   } else {
+    selo.innerHTML = `<span class="selo selo-info">ℹ Concelho com cadastro</span>`;
     titulo.textContent = `${c.nome}: o concelho já tem cadastro`;
     corpo.innerHTML = `
-      <div class="caixa">
-        <p><strong>${c.nome}</strong> (${c.local}) <strong>não está</strong> na lista oficial
-          de concelhos sem cadastro. Por isso, o terreno <strong>não se identifica no BUPi</strong>.</p>
-        <p>Nestes concelhos, a forma e os limites dos terrenos já constam do cadastro
-          da Direção-Geral do Território (DGT).</p>
-      </div>
-      <p>Este site foi pensado para os concelhos do BUPi. Para o seu caso, informe-se na
-        câmara municipal, nas Finanças ou no
+      <p><strong>${c.nome}</strong> (${c.local}) <strong>não está</strong> na lista oficial
+        de concelhos sem cadastro. Por isso, o terreno <strong>não se identifica no BUPi</strong>.</p>
+      <p>Nestes concelhos, a forma e os limites dos terrenos já constam do cadastro
+        da Direção-Geral do Território (DGT).</p>
+      <p class="caixa">Este site foi pensado para os concelhos do BUPi. Para o seu caso,
+        informe-se na câmara municipal, nas Finanças ou no
         <a href="https://www.dgterritorio.gov.pt/cadastro">site do cadastro da DGT</a>.</p>
       <p class="fonte">Fonte: <a href="${fonte.url}">${fonte.texto}</a>
         (o concelho não consta da lista).</p>`;
