@@ -23,6 +23,10 @@ const Config = (() => {
         return v.valor === 0 ? "grátis" : v.valor.toLocaleString("pt-PT") + " €";
       case "percentagem":
         return Math.round(v.valor * 100) + " %";
+      case "anos":
+        return v.valor === 1 ? "1 ano" : v.valor + " anos";
+      case "dias":
+        return v.valor + " dias";
       case "dias_uteis":
         return v.valor + " dias úteis";
       default:
@@ -53,7 +57,12 @@ const Config = (() => {
     }
   }
 
-  return { carregar, preencher };
+  // Troca {chave} pelo valor formatado (precisa da config já carregada).
+  function substituir(texto, cfg) {
+    return texto.replace(/\{(\w+)\}/g, (m, k) => (cfg.valores[k] ? formatarValor(cfg.valores[k]) : m));
+  }
+
+  return { carregar, preencher, substituir, formatarValor };
 })();
 
 document.addEventListener("DOMContentLoaded", () => Config.preencher());

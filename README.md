@@ -18,8 +18,7 @@ O site ajuda donos de terrenos rústicos e mistos a **preparar-se** para a ident
 |---|---|
 | Investigação (processo, custos, dados geográficos) | ✅ Feita, ver `docs/` |
 | Página inicial | ✅ |
-| Diagnóstico, pergunta 1: concelho → BUPi ou cadastro | ✅ |
-| Diagnóstico, restantes perguntas | ⏳ |
+| Diagnóstico guiado (6 perguntas) com plano personalizado | ✅ |
 | Mapa de esboço do terreno | ⏳ |
 | Pedido de ajuda, perguntas frequentes, glossário | ⏳ |
 
@@ -30,6 +29,7 @@ O site ajuda donos de terrenos rústicos e mistos a **preparar-se** para a ident
 | `index.html`, `diagnostico.html` | Páginas do site |
 | `css/`, `js/` | Aspeto e funcionamento |
 | `dados/config.json` | **Único sítio com os valores legais** (custos, prazos) e a data da última verificação |
+| `dados/regras.json` | Perguntas e regras do diagnóstico, cada uma com a fonte oficial (verificar com `python ferramentas/validar_regras.py`) |
 | `dados/concelhos.json` | Os 308 concelhos, com a indicação de terem ou não cadastro (gerado por `ferramentas/gerar_concelhos.py`) |
 | `docs/` | Investigação com as fontes oficiais |
 

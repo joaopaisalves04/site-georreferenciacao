@@ -331,3 +331,96 @@ footer p { margin: .3em 0; }
   .contentor { padding-left: .9rem; padding-right: .9rem; }
   main { padding-top: 1.2rem; }
 }
+
+/* ---------- Diagnóstico: opções escolhidas e caixas de marcar ---------- */
+.opcoes button.escolhida { border-color: var(--primaria); background: #eef3fa; }
+.caixa-ok { background: var(--verde-claro); border: 1px solid #b9dcc3; }
+
+.opcao-marcar {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  font-weight: 700;
+  background: #fff;
+  border: 2px solid var(--linha);
+  border-radius: 14px;
+  padding: .9em 1.1em;
+  margin: 0;
+  cursor: pointer;
+  min-height: 56px;
+}
+.opcao-marcar:hover { border-color: var(--primaria); }
+.opcao-marcar:has(input:checked) { border-color: var(--primaria); background: #eef3fa; }
+.opcao-marcar input {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  accent-color: var(--primaria);
+}
+
+/* ---------- Resultado ---------- */
+.lista-docs { list-style: none; padding: 0; margin: 0; display: grid; gap: .8rem; }
+.doc {
+  display: flex;
+  gap: .9rem;
+  align-items: flex-start;
+  border: 2px solid var(--linha);
+  border-radius: 14px;
+  padding: 1rem;
+}
+.doc p { margin: .3em 0; color: var(--tinta-suave); }
+.doc .doc-titulo { display: block; }
+.doc-icone {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-weight: 800;
+  color: #fff;
+}
+.doc-etiqueta {
+  display: inline-block;
+  font-size: .8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: .2rem;
+}
+.doc-tem { border-color: #b9dcc3; background: var(--verde-claro); }
+.doc-tem .doc-icone { background: var(--verde); }
+.doc-tem .doc-etiqueta { color: var(--verde); }
+.doc-falta { border-color: #e8b9a3; background: var(--terra-clara); }
+.doc-falta .doc-icone { background: var(--terra); }
+.doc-falta .doc-etiqueta { color: var(--terra); }
+.doc-info .doc-icone { background: var(--primaria); font-style: italic; font-family: Georgia, serif; }
+.doc-info .doc-etiqueta { color: var(--primaria); }
+
+.custo .fonte { display: block; margin-top: .4rem; }
+
+.lista-cuidados, .lista-passos { padding-left: 1.3rem; }
+.lista-cuidados li, .lista-passos li { margin-bottom: .8rem; }
+
+.resumo {
+  margin: 1.5rem 0;
+  border: 2px solid var(--linha);
+  border-radius: 14px;
+  padding: .8rem 1rem;
+}
+.resumo summary { font-weight: 700; cursor: pointer; min-height: 32px; }
+.resumo ul { padding-left: 1.2rem; }
+.resumo li { margin: .3rem 0; color: var(--tinta-suave); }
+.resumo li strong { color: var(--tinta); }
+
+/* ---------- Impressão ---------- */
+@media print {
+  body { font-size: 12pt; background: #fff; }
+  .aviso-topo { background: #fff; color: #000; border-bottom: 1px solid #000; }
+  .aviso-topo a { color: #000; }
+  .cabecalho .etiqueta-teste, .voltar, .nao-imprimir, footer { display: none; }
+  .cartao { box-shadow: none; padding: 0; }
+  .doc, .custo, .caixa { break-inside: avoid; }
+  .resumo { display: none; }
+  a { color: #000; }
+}

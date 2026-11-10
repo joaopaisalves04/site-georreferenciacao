@@ -36,34 +36,9 @@
     <div class="contentor contentor-estreito">
       <a class="voltar" href="index.html">← Início</a>
 
-      <!-- Pergunta 1: concelho -->
-      <section id="passo-concelho" class="cartao">
-        <div class="progresso">
-          <span class="progresso-texto">Pergunta 1 de 5</span>
-          <div class="progresso-barra" aria-hidden="true"><span style="width: 20%"></span></div>
-        </div>
-
-        <h1>Em que concelho fica o terreno?</h1>
-
-        <label for="campo-concelho">Escreva as primeiras letras do concelho</label>
-        <input type="text" id="campo-concelho" autocomplete="off" placeholder="Por exemplo: Lousã"
-               aria-describedby="ajuda-concelho" aria-controls="lista-concelhos">
-        <p id="ajuda-concelho" class="ajuda">Depois toque no nome certo na lista que aparece.</p>
-
-        <p id="estado-pesquisa" class="estado" aria-live="polite"></p>
-        <ul id="lista-concelhos" class="opcoes"></ul>
-      </section>
-
-      <!-- Resultado (preenchido pelo JavaScript) -->
-      <section id="resultado" class="cartao" hidden>
-        <div id="resultado-selo"></div>
-        <h1 id="resultado-titulo" tabindex="-1"></h1>
-        <div id="resultado-corpo"></div>
-        <div class="botoes">
-          <button type="button" id="mudar-concelho" class="botao-secundario">← Escolher outro concelho</button>
-        </div>
-        <p class="caixa">As próximas perguntas (tipo de terreno, documentos e objetivo)
-          estão a ser preparadas.</p>
+      <!-- Cada pergunta e o resultado aparecem aqui (js/diagnostico.js). -->
+      <section id="ecra" class="cartao">
+        <p>A carregar…</p>
       </section>
 
       <noscript>
