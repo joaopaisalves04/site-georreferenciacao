@@ -14,6 +14,7 @@
     "PROC":    { "nome": "BUPi: Modelo de procuração simplificada", "url": "https://sta-informativo.bupi.gov.pt/media/procuracao-simplificada-bupi.pdf" },
     "DL87":    { "nome": "Decreto-Lei 87/2026", "url": "https://diariodarepublica.pt/dr/detalhe/decreto-lei/87-2026-1085738183" },
     "DR8":     { "nome": "Decreto Regulamentar 8/2026", "url": "https://diariodarepublica.pt/dr/detalhe/decreto-regulamentar/8-2026-1172217158" },
+    "EMIG":    { "nome": "Governo de Portugal: BUPi no Portal das Comunidades Portuguesas", "url": "https://portugal.gov.pt/gc25/comunicacao/comunicados/bupi-no-portal-das-comunidades-portuguesas-" },
     "MAPA":    { "nome": "Manual do Mapa Público do BUPi", "url": "https://www.cm-montalegre.pt/cmmontalegre/uploads/writer_file/document/4906/manual_mapa_publico_do_bupi.pdf" }
   },
 
@@ -200,6 +201,11 @@
     {
       "texto": "Depois de submeter, um técnico valida a RGG em {prazo_validacao}. Se lhe pedirem correções, tem {prazo_correcao} para responder; caso contrário, a RGG é recusada.",
       "fonte": ["DR8"]
+    },
+    {
+      "texto": "Se o dono vive no estrangeiro, ele próprio pode tratar de tudo online, a partir de qualquer país, com o Cartão de Cidadão ou a Chave Móvel Digital.",
+      "quando": { "para_quem": { "em": ["outro"] } },
+      "fonte": ["EMIG"]
     },
     {
       "texto": "Num prédio misto, identifica-se o prédio todo: a parte rústica e a parte urbana juntas.",

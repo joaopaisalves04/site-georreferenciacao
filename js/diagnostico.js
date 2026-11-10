@@ -15,17 +15,13 @@ const FONTES_CONCELHOS = {
   },
 };
 
-let regras, cfg, concelhos;
+let regras, cfg;
 const respostas = {};
 let indice = 0;
 
 const ecra = () => document.getElementById("ecra");
 
 // ---------- Utilitários ----------
-
-function normalizar(texto) {
-  return texto.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
-}
 
 function t(texto) {
   return Config.substituir(texto, cfg);
@@ -105,8 +101,8 @@ function perguntaConcelho(p) {
   mostrar(`
     ${cabecalhoPergunta()}
     <h1>${p.titulo}</h1>
-    <label for="campo-concelho">Escreva as primeiras letras do concelho</label>
-    <input type="text" id="campo-concelho" autocomplete="off" placeholder="Por exemplo: Lousã"
+    <label for="campo-concelho">Escreva o concelho ou a freguesia</label>
+    <input type="text" id="campo-concelho" autocomplete="off" placeholder="Por exemplo: Lousã ou Fátima"
            aria-describedby="ajuda-concelho" aria-controls="lista-concelhos">
     <p id="ajuda-concelho" class="ajuda">Depois toque no nome certo na lista que aparece.</p>
     <p id="estado-pesquisa" class="estado" aria-live="polite"></p>
@@ -116,37 +112,29 @@ function perguntaConcelho(p) {
   campo.addEventListener("input", () => sugerirConcelhos(campo.value));
 }
 
-function procurarConcelhos(texto) {
-  const q = normalizar(texto);
-  if (!q) return [];
-  return concelhos.filter((c) =>
-    c.chave.startsWith(q) || c.chave.split(/[\s-]+/).some((parte) => parte.startsWith(q))
-  );
-}
-
 function sugerirConcelhos(texto) {
   const lista = document.getElementById("lista-concelhos");
   const estado = document.getElementById("estado-pesquisa");
   lista.innerHTML = "";
-  if (normalizar(texto).length < 2) { estado.textContent = ""; return; }
+  if (Locais.normalizar(texto).length < 2) { estado.textContent = ""; return; }
 
-  const encontrados = procurarConcelhos(texto);
+  const encontrados = Locais.procurar(texto);
   if (encontrados.length === 0) {
-    estado.textContent = "Não encontrámos nenhum concelho com esse nome. Escreva o nome do concelho (não da freguesia nem da aldeia) e verifique a escrita.";
+    estado.textContent = "Não encontrámos nenhum concelho ou freguesia com esse nome. Verifique a escrita.";
     return;
   }
-  encontrados.slice(0, MAX_SUGESTOES).forEach((c) => {
+  encontrados.slice(0, MAX_SUGESTOES).forEach((r) => {
     const li = document.createElement("li");
     const b = document.createElement("button");
     b.type = "button";
-    b.innerHTML = `<span>${escapar(c.nome)}<span class="local">${escapar(c.local)}</span></span>`;
-    b.addEventListener("click", () => escolherConcelho(c));
+    b.innerHTML = `<span>${escapar(r.nome)}<span class="local">${escapar(r.descricao)}</span></span>`;
+    b.addEventListener("click", () => escolherConcelho(r.concelho));
     li.appendChild(b);
     lista.appendChild(li);
   });
   estado.textContent = encontrados.length > MAX_SUGESTOES
-    ? `Há ${encontrados.length} concelhos com estas letras. Continue a escrever para ver menos.`
-    : (encontrados.length === 1 ? "Encontrámos 1 concelho:" : `Encontrámos ${encontrados.length} concelhos:`);
+    ? `Há ${encontrados.length} resultados com estas letras. Continue a escrever para ver menos.`
+    : (encontrados.length === 1 ? "Encontrámos 1 resultado:" : `Encontrámos ${encontrados.length} resultados:`);
 }
 
 function fonteConcelho(c) {
@@ -341,7 +329,8 @@ function mostrarResultado() {
       do BUPi ou da câmara municipal. Este site não faz nem submete a RGG.</p>
 
     <div class="botoes nao-imprimir">
-      <button type="button" data-acao="imprimir">Imprimir ou guardar em PDF</button>
+      <a class="botao" href="mapa.html">✏️ Fazer um esboço no mapa</a>
+      <button type="button" class="botao-secundario" data-acao="imprimir">Imprimir ou guardar em PDF</button>
       <button type="button" class="botao-secundario" data-acao="anterior">← Voltar</button>
       <button type="button" class="botao-secundario" data-acao="recomecar">Recomeçar</button>
     </div>`);
@@ -365,14 +354,13 @@ document.addEventListener("click", (e) => {
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const [r, c, l] = await Promise.all([
+    const [r, c] = await Promise.all([
       fetch("dados/regras.json").then((x) => x.json()),
       Config.carregar(),
-      fetch("dados/concelhos.json").then((x) => x.json()),
+      Locais.carregar(),
     ]);
     regras = r;
     cfg = c;
-    concelhos = l.concelhos.map((x) => ({ ...x, chave: normalizar(x.nome) }));
   } catch (e) {
     ecra().innerHTML = `<p class="caixa caixa-aviso">Não foi possível carregar o diagnóstico.
       Tente recarregar a página.</p>`;
