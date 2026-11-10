@@ -28,7 +28,7 @@
       "id": "tipo",
       "tipo": "escolha",
       "titulo": "Que tipo de prédio é?",
-      "ajuda": "Está indicado na caderneta predial: rústica ou urbana. Se o mesmo prédio tiver uma parte rústica e uma parte urbana (por exemplo, terreno com casa), é misto.",
+      "ajuda": "Se tiver a caderneta das Finanças, lá diz «rústica» ou «urbana». Terreno com casa costuma ser misto.",
       "opcoes": [
         { "id": "rustico", "texto": "Rústico", "detalhe": "Terreno agrícola, pinhal, mato, olival…" },
         { "id": "misto",   "texto": "Misto", "detalhe": "Terreno com uma casa, palheiro ou armazém" },
@@ -39,37 +39,37 @@
     {
       "id": "para_quem",
       "tipo": "escolha",
-      "titulo": "Vai tratar disto para si ou para outra pessoa?",
+      "titulo": "Quem está a tratar disto?",
       "opcoes": [
-        { "id": "proprio", "texto": "Para mim", "detalhe": "O terreno é meu, do meu casal ou de uma herança de que faço parte" },
-        { "id": "outro",   "texto": "Para outra pessoa", "detalhe": "Um familiar, um amigo ou um vizinho" }
+        { "id": "proprio", "texto": "Eu sou o dono", "detalhe": "Ou um dos donos, ou um dos herdeiros" },
+        { "id": "outro",   "texto": "Estou a ajudar outra pessoa", "detalhe": "Por exemplo, o pai, a mãe ou um vizinho" }
       ]
     },
     {
       "id": "dono",
       "tipo": "escolha",
       "titulo": "Quem é o dono do terreno?",
-      "ajuda": "Na caderneta predial, veja a parte «Titulares».",
+      "ajuda": "Se tiver a caderneta das Finanças, veja a parte «Titulares».",
       "opcoes": [
         { "id": "unico",            "texto": "Uma só pessoa" },
         { "id": "casal",            "texto": "Um casal" },
-        { "id": "comproprietarios", "texto": "Várias pessoas", "detalhe": "Cada uma tem uma parte (compropriedade)" },
+        { "id": "comproprietarios", "texto": "Várias pessoas", "detalhe": "Por exemplo, irmãos que têm cada um uma parte" },
         { "id": "heranca",          "texto": "Uma herança ainda não partilhada", "detalhe": "Na caderneta aparece «Cabeça de Casal da Herança»" },
-        { "id": "comprado",         "texto": "Foi comprado, mas a caderneta ainda tem o nome do vendedor" },
+        { "id": "comprado",         "texto": "Foi comprado, mas os papéis ainda estão em nome do vendedor" },
         { "id": "sem_papeis",       "texto": "Não há papéis", "detalhe": "O terreno é usado há muitos anos, mas sem documentos" }
       ]
     },
     {
       "id": "documentos",
       "tipo": "varias",
-      "titulo": "Que documentos já tem?",
+      "titulo": "Que papéis já tem?",
       "ajuda": "Pode escolher vários. Depois carregue em «Continuar».",
       "opcoes": [
-        { "id": "caderneta",   "texto": "Caderneta predial", "detalhe": "Das Finanças" },
+        { "id": "caderneta",   "texto": "Caderneta predial", "detalhe": "O papel das Finanças com os dados do terreno" },
         { "id": "escritura",   "texto": "Escritura", "detalhe": "De compra, venda ou doação" },
         { "id": "doc_heranca", "texto": "Documento da herança", "detalhe": "Habilitação de herdeiros, NIF da herança, Imposto do Selo ou testamento" },
         { "id": "procuracao",  "texto": "Procuração do dono" },
-        { "id": "omisso",      "texto": "O terreno não está nas Finanças", "detalhe": "Não tem caderneta nem artigo matricial", "exclusivo_com": ["caderneta"] },
+        { "id": "omisso",      "texto": "O terreno não está nas Finanças", "detalhe": "Não tem caderneta, nem número nas Finanças", "exclusivo_com": ["caderneta"] },
         { "id": "nenhum",      "texto": "Nenhum destes", "exclusivo": true }
       ]
     },
@@ -90,7 +90,7 @@
   "fins": {
     "urbano": {
       "titulo": "Prédios só urbanos não se identificam no BUPi",
-      "texto": "O BUPi serve para identificar prédios <strong>rústicos e mistos</strong>. Um prédio só urbano (por exemplo, só uma casa) não pode ser identificado. Se o prédio tiver também uma parte rústica, é misto: volte atrás e escolha «Misto».",
+      "texto": "O BUPi serve para terrenos <strong>rústicos e mistos</strong>. Uma casa ou edifício sozinho (prédio só urbano) não se identifica no BUPi. Se tiver também terreno à volta, pode ser misto: volte atrás e escolha «Misto».",
       "fonte": ["MANPREP"]
     }
   },
@@ -122,7 +122,7 @@
     {
       "id": "doc_heranca",
       "texto": "Um documento da herança",
-      "detalhe": "Basta um destes: comprovativo do NIF da herança, habilitação de herdeiros, participação do Imposto do Selo, ou testamento com o óbito averbado. Qualquer herdeiro pode tratar da RGG.",
+      "detalhe": "Basta um destes: comprovativo do NIF da herança, habilitação de herdeiros, participação do Imposto do Selo, ou testamento com o óbito averbado. Qualquer herdeiro pode tratar da identificação do terreno.",
       "satisfeito_por": ["doc_heranca"],
       "quando": { "dono": { "em": ["heranca"] } },
       "fonte": ["MANPREP", "FAQ"]
@@ -146,7 +146,7 @@
     {
       "id": "procuracao",
       "texto": "Procuração do dono (numa herança, de um dos herdeiros)",
-      "detalhe": "Quem não é dono precisa de procuração para tratar da RGG. O BUPi tem um <a href=\"https://sta-informativo.bupi.gov.pt/media/procuracao-simplificada-bupi.pdf\">modelo simplificado</a>, só para a RGG. Se o dono não puder assinar, a assinatura a rogo tem de ser reconhecida (notário, advogado, solicitador ou conservatória).",
+      "detalhe": "Quem não é dono precisa de uma procuração (uma autorização por escrito). O BUPi tem um <a href=\"https://sta-informativo.bupi.gov.pt/media/procuracao-simplificada-bupi.pdf\">modelo simplificado</a>, só para isto. Se o dono não souber ou não puder assinar, a assinatura feita por outra pessoa a pedido dele tem de ser reconhecida (notário, advogado, solicitador ou conservatória).",
       "satisfeito_por": ["procuracao"],
       "quando": { "para_quem": { "em": ["outro"] } },
       "fonte": ["FAQ", "PROC"]
@@ -154,15 +154,15 @@
     {
       "id": "declaracao_possuidor",
       "texto": "Declaração em que se identifica a si e ao terreno",
-      "detalhe": "No BUPi entra como «possuidor». Depois, para ficar com o terreno em seu nome, é preciso uma justificação de direitos (por exemplo, por usucapião) na Conservatória.",
+      "detalhe": "No BUPi entra como quem usa o terreno («possuidor»). Para o terreno ficar em seu nome, é preciso depois provar que é seu, na Conservatória (chama-se justificação).",
       "informativo": true,
       "quando": { "dono": { "em": ["sem_papeis"] } },
       "fonte": ["FAQ", "MANPREP"]
     },
     {
       "id": "omisso",
-      "texto": "Para inscrever o terreno nas Finanças: declaração no balcão BUPi, requerimento nas Finanças e aceitação dos limites assinada por pelo menos {confinantes_omisso} vizinhos",
-      "detalhe": "Os vizinhos são os donos dos terrenos que fazem estrema com o seu.",
+      "texto": "Para pôr o terreno nas Finanças: uma declaração no balcão BUPi, um pedido nas Finanças e uma folha assinada por pelo menos {confinantes_omisso} vizinhos a aceitar os limites",
+      "detalhe": "Os vizinhos são os donos dos terrenos que fazem fronteira com o seu.",
       "informativo": true,
       "quando": { "documentos": { "contem": ["omisso"] } },
       "fonte": ["DL87", "FAQ"]
@@ -171,18 +171,18 @@
 
   "custos": [
     {
-      "texto": "RGG feita por si, online",
+      "texto": "se fizer sozinho, pela internet",
       "valor": "{rgg_online}",
       "destaque": true,
       "fonte": ["FAQ", "PASSO"]
     },
     {
-      "texto": "RGG feita com um técnico no balcão (por terreno; a partir do 10.º: {rgg_balcao_desde_10})",
+      "texto": "por terreno, se for ao balcão BUPi da câmara e um técnico fizer consigo (a partir do 10.º terreno: {rgg_balcao_desde_10})",
       "valor": "{rgg_balcao_ate_9}",
       "fonte": ["DL87"]
     },
     {
-      "texto": "Justificação na Conservatória (+{por_predio_adicional} por cada terreno a mais; menos {reducao_rustico_lt_10000} se o terreno rústico valer menos de 10 000 €)",
+      "texto": "para provar na Conservatória que o terreno é seu (+{por_predio_adicional} por cada terreno a mais; menos {reducao_rustico_lt_10000} se o terreno valer menos de 10 000 €)",
       "valor": "{proc_especial_justificacao}",
       "quando": { "dono": { "em": ["sem_papeis"] } },
       "fonte": ["DL87"]
@@ -191,15 +191,15 @@
 
   "cuidados": [
     {
-      "texto": "Não desenhe por cima de caminhos, estradas ou ribeiras. Isso leva à recusa da RGG ou a um ajuste automático do desenho.",
+      "texto": "Não desenhe por cima de caminhos, estradas ou ribeiras. Se o fizer, a identificação pode ser recusada ou o desenho corrigido automaticamente.",
       "fonte": ["FAQ", "DR8"]
     },
     {
-      "texto": "Fale com os vizinhos antes de desenhar. Se o seu desenho se sobrepuser ao de um vizinho, a RGG fica validada «com reserva».",
+      "texto": "Fale com os vizinhos antes de desenhar. Se o seu desenho ficar por cima do de um vizinho, a identificação fica aceite só «com reserva».",
       "fonte": ["FAQ", "DR8"]
     },
     {
-      "texto": "Depois de submeter, um técnico valida a RGG em {prazo_validacao}. Se lhe pedirem correções, tem {prazo_correcao} para responder; caso contrário, a RGG é recusada.",
+      "texto": "Depois de entregar, um técnico verifica tudo em {prazo_validacao}. Se lhe pedirem correções, tem {prazo_correcao} para responder; se não responder, o pedido é recusado.",
       "fonte": ["DR8"]
     },
     {
@@ -218,17 +218,17 @@
       "fonte": ["MANPREP"]
     },
     {
-      "texto": "Comece por pedir a caderneta predial: é nela que confirma quem consta como dono e qual é a área registada.",
+      "texto": "Comece por pedir a caderneta predial: é nela que vê quem aparece como dono e qual é a área do terreno.",
       "quando": { "documentos": { "nao_contem": ["caderneta", "omisso"] } },
       "fonte": ["MANPREP"]
     },
     {
-      "texto": "Terreno que não está nas Finanças: depois da inscrição, tem {prazo_omisso_rgg} para concluir a RGG e, depois, {prazo_omisso_registo} para pedir o registo. Se falhar estes prazos, tudo é cancelado.",
+      "texto": "Terreno que não está nas Finanças: depois de o pôr nas Finanças, tem {prazo_omisso_rgg} para acabar a identificação e, depois, {prazo_omisso_registo} para o registar na Conservatória. Se falhar estes prazos, tudo é cancelado.",
       "quando": { "documentos": { "contem": ["omisso"] } },
       "fonte": ["DL87"]
     },
     {
-      "texto": "Se a área da caderneta estiver errada, faça a RGG na mesma: a nova área é comunicada às Finanças. Se o erro for noutro dado (por exemplo, as confrontações), corrija primeiro nas Finanças.",
+      "texto": "Se a área da caderneta estiver errada, faça a identificação na mesma: a área certa é enviada às Finanças. Se o erro for noutra coisa (por exemplo, os nomes dos vizinhos), corrija primeiro nas Finanças.",
       "quando": { "objetivo": { "em": ["ordem"] } },
       "fonte": ["FAQ"]
     }
@@ -236,22 +236,22 @@
 
   "objetivos": [
     {
-      "texto": "<strong>A RGG tem de estar feita antes da escritura.</strong> Desde 16 de abril de 2026, o número da RGG tem de constar dos documentos de venda, doação ou partilha de terrenos rústicos e mistos.",
+      "texto": "<strong>Trate da identificação antes da escritura.</strong> Desde 16 de abril de 2026, o número da identificação do terreno (RGG) tem de constar dos papéis de venda, doação ou partilha.",
       "quando": { "objetivo": { "em": ["vender", "partilha"] } },
       "fonte": ["DL87"]
     },
     {
-      "texto": "<strong>A RGG é obrigatória no pedido de apoio.</strong> As candidaturas a apoios, subsídios e incentivos sobre terrenos rústicos ou mistos têm de incluir a RGG.",
+      "texto": "<strong>Sem identificação do terreno, não há apoio.</strong> Os pedidos de apoios e subsídios para terrenos rústicos ou mistos têm de incluir a identificação do terreno (RGG).",
       "quando": { "objetivo": { "em": ["apoio"] } },
       "fonte": ["DL87"]
     },
     {
-      "texto": "<strong>Sem documentos, trate primeiro da justificação.</strong> Antes de marcar a venda ou as partilhas, fale com a Conservatória (ou com um advogado ou solicitador): sem documentos, é preciso uma justificação de direitos para o terreno ficar em seu nome.",
+      "texto": "<strong>Sem documentos, trate primeiro da justificação.</strong> Antes de marcar a venda ou as partilhas, fale com a Conservatória (ou com um advogado ou solicitador): sem papéis, primeiro é preciso provar que o terreno é seu.",
       "quando": { "dono": { "em": ["sem_papeis"] }, "objetivo": { "em": ["vender", "partilha"] } },
       "fonte": ["DL87"]
     },
     {
-      "texto": "<strong>Sobre as cartas:</strong> o Estado envia, de 3 em 3 meses, cartas ou emails aos donos com a localização estimada do terreno, para os incentivar a fazer a RGG. Se recebeu uma <strong>notificação do registo predial</strong>, tem {prazo_notificacao_irn} para regularizar; se não o fizer, pode começar o procedimento de «prédio sem dono conhecido».",
+      "texto": "<strong>Sobre as cartas:</strong> o Estado envia, de 3 em 3 meses, cartas ou emails aos donos com a localização estimada do terreno, para os incentivar a identificá-lo. Se recebeu uma <strong>notificação do registo predial</strong>, tem {prazo_notificacao_irn} para regularizar; se não o fizer, pode começar o procedimento de «prédio sem dono conhecido».",
       "quando": { "objetivo": { "em": ["carta"] } },
       "fonte": ["DL87", "DR8"]
     }
@@ -259,16 +259,16 @@
 
   "passos": [
     {
-      "texto": "Veja no <a href=\"https://mapapublico.bupi.gov.pt/pesquisaprocesso/\">Mapa Público do BUPi</a> se o terreno já foi identificado por alguém.",
+      "texto": "Veja no <a href=\"https://mapapublico.bupi.gov.pt/pesquisaprocesso/\">Mapa Público do BUPi</a> se o terreno já foi identificado por alguém (por exemplo, um familiar).",
       "quando": { "documentos": { "nao_contem": ["omisso"] } },
       "fonte": ["MAPA"]
     },
     {
-      "texto": "Junte os documentos que faltam (lista acima).",
+      "texto": "Junte os papéis que faltam.",
       "fonte": ["PASSO"]
     },
     {
-      "texto": "Faça a RGG <a href=\"https://cidadao.bupi.gov.pt/\">online na plataforma do BUPi</a>, ou marque atendimento num <a href=\"https://bupi.gov.pt/pt/balcoes-bupi\">balcão BUPi</a>.",
+      "texto": "Faça a identificação do terreno <a href=\"https://cidadao.bupi.gov.pt/\">sozinho, pela internet</a>, ou marque atendimento num <a href=\"https://bupi.gov.pt/pt/balcoes-bupi\">balcão BUPi</a>.",
       "quando": { "documentos": { "nao_contem": ["omisso"] } },
       "fonte": ["PASSO", "FAQ"]
     },
@@ -278,12 +278,12 @@
       "fonte": ["FAQ", "DL87"]
     },
     {
-      "texto": "Contacte a Conservatória do Registo Predial mais próxima para tratar da justificação.",
+      "texto": "Fale com a Conservatória do Registo Predial mais próxima para provar que o terreno é seu.",
       "quando": { "dono": { "em": ["sem_papeis"] } },
       "fonte": ["FAQ"]
     },
     {
-      "texto": "Depois de a RGG ser validada, peça o registo na Conservatória (também pode ser online). Os custos do registo confirmam-se na Conservatória.",
+      "texto": "Quando a identificação estiver aceite, registe o terreno na Conservatória (também pode ser pela internet). Pergunte lá quanto custa o registo.",
       "fonte": ["PASSO", "FAQ"]
     }
   ]

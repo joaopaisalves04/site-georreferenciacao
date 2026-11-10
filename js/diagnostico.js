@@ -146,16 +146,18 @@ function escolherConcelho(c) {
 
   const f = fonteConcelho(c);
   mostrar(`
-    <span class="selo selo-info">ℹ Concelho com cadastro</span>
-    <h1>${escapar(c.nome)}: o concelho já tem cadastro</h1>
-    <p><strong>${escapar(c.nome)}</strong> (${escapar(c.local)}) <strong>não está</strong> na lista oficial
-      de concelhos sem cadastro. Por isso, o terreno <strong>não se identifica no BUPi</strong>.</p>
-    <p>Nestes concelhos, a forma e os limites dos terrenos já constam do cadastro
-      da Direção-Geral do Território (DGT).</p>
-    <p class="caixa">Este site foi pensado para os concelhos do BUPi. Para o seu caso,
-      informe-se na câmara municipal, nas Finanças ou no
-      <a href="https://www.dgterritorio.gov.pt/cadastro">site do cadastro da DGT</a>.</p>
-    <p class="fonte">Fonte: <a href="${f.url}">${f.nome}</a> (o concelho não consta da lista).</p>
+    <span class="selo selo-info">ℹ Resultado</span>
+    <h1>Em ${escapar(c.nome)} não é preciso o BUPi</h1>
+    <p>Em <strong>${escapar(c.nome)}</strong> (${escapar(c.local)}), os limites dos terrenos já estão
+      registados no Estado (no chamado <strong>cadastro</strong>). Por isso, o terreno
+      <strong>não se identifica no BUPi</strong>.</p>
+    <p class="caixa">Este site foi pensado para os concelhos do BUPi. Se tiver dúvidas sobre o seu terreno,
+      pergunte na câmara municipal ou nas Finanças.</p>
+    <details class="fontes">
+      <summary>De onde vem esta informação</summary>
+      <p class="fonte"><a href="${f.url}">${f.nome}</a>: o concelho não está na lista dos concelhos sem cadastro.
+        Mais informação no <a href="https://www.dgterritorio.gov.pt/cadastro">site do cadastro da DGT</a>.</p>
+    </details>
     ${botaoVoltar()}`);
 }
 
@@ -165,8 +167,8 @@ function seloConcelho() {
   const c = respostas.concelho;
   if (indice !== 1 || !c) return "";
   const f = fonteConcelho(c);
-  return `<p class="caixa caixa-ok">✓ <strong>${escapar(c.nome)}</strong> está abrangido pelo BUPi.<br>
-    <span class="fonte">Fonte: <a href="${f.url}">${f.nome}</a></span></p>`;
+  return `<p class="caixa caixa-ok">✓ Em <strong>${escapar(c.nome)}</strong> os terrenos identificam-se no BUPi.
+    <a class="fonte" href="${f.url}" title="${f.nome}">(fonte)</a></p>`;
 }
 
 function perguntaEscolha(p) {
@@ -261,12 +263,43 @@ function textoResposta(pergunta) {
 function mostrarResultado() {
   indice = regras.perguntas.length; // "Voltar" no resultado regressa à última pergunta
   const tem = respostas.documentos || [];
+  const usadas = new Set(); // fontes usadas, listadas no fim em "De onde vem esta informação"
+  const usar = (lista) => { lista.forEach((r) => r.fonte.forEach((f) => usadas.add(f))); return lista; };
+  const maiuscula = (x) => x.charAt(0).toUpperCase() + x.slice(1);
 
-  const docs = regras.documentos.filter(aplica).map((d) => {
-    let estado, icone;
-    if (d.informativo) { estado = "info"; icone = "i"; }
-    else if ((d.satisfeito_por || []).some((x) => tem.includes(x))) { estado = "tem"; icone = "✓"; }
-    else { estado = "falta"; icone = "!"; }
+  const docs = usar(regras.documentos.filter(aplica)).map((d) => ({
+    d,
+    estado: d.informativo ? "info"
+      : ((d.satisfeito_por || []).some((x) => tem.includes(x)) ? "tem" : "falta"),
+  }));
+  const falta = docs.filter((x) => x.estado === "falta");
+  const jaTem = docs.filter((x) => x.estado === "tem");
+  const preparar = docs.filter((x) => x.estado === "info" && x.d.id !== "acesso");
+  const custos = usar(regras.custos.filter(aplica));
+  const objetivos = usar(regras.objetivos.filter(aplica));
+  const cuidados = usar(regras.cuidados.filter(aplica));
+  const passos = usar(regras.passos.filter(aplica));
+
+  // ---- Resumo: 3 blocos curtos ----
+  // Três situações: falta alguma coisa; já tem tudo o que se pede; ou o caso só pede coisas a preparar
+  // (por exemplo, quem não tem papéis): nunca dizer "já tem tudo" a quem não tem nada.
+  const listaJaTem = jaTem.map((x) => t(x.d.texto).toLowerCase()).join(", ");
+  const blocoPapeis = `
+    ${falta.length
+      ? `<p><strong>Falta-lhe:</strong></p><ul class="lista-falta">${falta.map((x) => `<li>${t(x.d.texto)}</li>`).join("")}</ul>
+         ${jaTem.length ? `<p class="ja-tem">✓ Já tem: ${listaJaTem}.</p>` : ""}`
+      : (jaTem.length ? `<p class="tudo-ok">✓ Já tem o que é preciso: ${listaJaTem}.</p>` : "")}
+    ${preparar.length
+      ? `<p><strong>${falta.length || jaTem.length ? "Prepare também:" : "O que vai precisar:"}</strong></p>
+         <ul>${preparar.map((x) => `<li>${t(x.d.texto)}</li>`).join("")}</ul>`
+      : ""}`;
+  const blocoCustos = `<ul class="lista-custos">${custos.map((c) =>
+    `<li><strong>${maiuscula(t(c.valor))}</strong> ${t(c.texto)}</li>`).join("")}</ul>`;
+  const blocoPassos = `<ol class="lista-passos">${passos.map((p) => `<li>${t(p.texto)}</li>`).join("")}</ol>`;
+
+  // ---- Detalhe (escondido em "Ver mais") ----
+  const listaDocs = docs.map(({ d, estado }) => {
+    const icone = { tem: "✓", falta: "!", info: "i" }[estado];
     const etiqueta = { tem: "Já tem", falta: "Falta", info: "A preparar" }[estado];
     return `
       <li class="doc doc-${estado}">
@@ -275,68 +308,73 @@ function mostrarResultado() {
           <span class="doc-etiqueta">${etiqueta}</span>
           <strong class="doc-titulo">${t(d.texto)}</strong>
           ${d.detalhe ? `<p>${t(d.detalhe)}</p>` : ""}
-          ${linkFontes(d.fonte)}
         </div>
       </li>`;
   }).join("");
-
-  const custos = regras.custos.filter(aplica).map((c) => `
-    <div class="custo ${c.destaque ? "custo-destaque" : ""}">
-      <span class="valor">${t(c.valor)}</span>
-      <span class="rotulo">${t(c.texto)}</span>
-      ${linkFontes(c.fonte)}
-    </div>`).join("");
-
-  const objetivos = regras.objetivos.filter(aplica).map((o) => `
-    <div class="caixa">${t(o.texto)}<br>${linkFontes(o.fonte)}</div>`).join("");
-
-  const cuidados = regras.cuidados.filter(aplica).map((c) => `
-    <li>${t(c.texto)}<br>${linkFontes(c.fonte)}</li>`).join("");
-
-  const passos = regras.passos.filter(aplica).map((p) => `
-    <li>${t(p.texto)}<br>${linkFontes(p.fonte)}</li>`).join("");
-
-  const resumo = regras.perguntas.map((p) => `
+  const fontes = [...usadas].map((c) => `<li><a href="${regras.fontes[c].url}">${regras.fontes[c].nome}</a></li>`).join("");
+  const respostasDadas = regras.perguntas.map((p) => `
     <li>${p.titulo} <strong>${escapar(textoResposta(p.id))}</strong></li>`).join("");
 
   mostrar(`
-    <span class="selo selo-ok">✓ Diagnóstico concluído</span>
-    <h1>O seu plano para identificar o terreno</h1>
+    <span class="selo selo-ok">✓ Pronto</span>
+    <h1>O seu plano</h1>
     <p>O terreno em <strong>${escapar(respostas.concelho.nome)}</strong> identifica-se no BUPi.
-      Com base nas suas respostas, isto é o que precisa de saber.</p>
+      Isto é o que precisa de saber:</p>
 
-    ${objetivos}
+    ${objetivos.map((o) => `<div class="caixa caixa-importante">${t(o.texto)}</div>`).join("")}
 
-    <h2>Documentos</h2>
-    <ul class="lista-docs">${docs}</ul>
-
-    <h2>Quanto custa</h2>
-    <div class="custos">${custos}</div>
-
-    <h2>Cuidados a ter</h2>
-    <ul class="lista-cuidados">${cuidados}</ul>
-
-    <h2>Próximos passos</h2>
-    <ol class="lista-passos">${passos}</ol>
-
-    <details class="resumo">
-      <summary>Ver as minhas respostas</summary>
-      <ul>${resumo}</ul>
-    </details>
-
-    <p class="caixa caixa-aviso">Esta informação é orientativa e não substitui o atendimento
-      do BUPi ou da câmara municipal. Este site não faz nem submete a RGG.</p>
+    <ol class="resumo-plano">
+      <li><h2>Os papéis</h2>${blocoPapeis}</li>
+      <li><h2>Quanto custa</h2>${blocoCustos}</li>
+      <li><h2>O que fazer a seguir</h2>${blocoPassos}</li>
+    </ol>
 
     <div class="botoes nao-imprimir">
-      <a class="botao" href="mapa.html">✏️ Fazer um esboço no mapa</a>
-      <button type="button" class="botao-secundario" data-acao="imprimir">Imprimir ou guardar em PDF</button>
-      <button type="button" class="botao-secundario" data-acao="partilhar">Enviar este plano a alguém</button>
-      <button type="button" class="botao-secundario" data-acao="anterior">← Voltar</button>
-      <button type="button" class="botao-secundario" data-acao="recomecar">Recomeçar</button>
+      <button type="button" data-acao="imprimir">🖨️ Imprimir este plano</button>
+      <button type="button" class="botao-secundario" data-acao="partilhar">Enviar a um familiar</button>
     </div>
     <p id="estado-partilha" class="estado nao-imprimir" aria-live="polite"></p>
-    <p class="ajuda nao-imprimir">A ligação leva só as respostas a estas perguntas, sem nomes nem contactos.</p>`);
+
+    <h2 class="titulo-mais">Ver mais</h2>
+    <details class="mais">
+      <summary>Explicação de cada papel</summary>
+      <ul class="lista-docs">${listaDocs}</ul>
+    </details>
+    <details class="mais">
+      <summary>Cuidados a ter (${cuidados.length})</summary>
+      <ul class="lista-cuidados">${cuidados.map((c) => `<li>${t(c.texto)}</li>`).join("")}</ul>
+    </details>
+    <details class="mais">
+      <summary>As minhas respostas</summary>
+      <ul class="lista-cuidados">${respostasDadas}</ul>
+    </details>
+    <details class="mais">
+      <summary>De onde vem esta informação</summary>
+      <p>Tudo o que aqui está vem da lei e das páginas oficiais do BUPi:</p>
+      <ul class="lista-cuidados">${fontes}</ul>
+    </details>
+
+    <p class="caixa caixa-aviso">Esta informação serve para se preparar. Não substitui o atendimento
+      do BUPi ou da câmara municipal, e este site não faz a identificação do terreno.</p>
+
+    <div class="botoes nao-imprimir">
+      <a class="botao botao-secundario" href="mapa.html">✏️ Desenhar o terreno no mapa</a>
+      <button type="button" class="botao-secundario" data-acao="anterior">← Voltar</button>
+      <button type="button" class="botao-secundario" data-acao="recomecar">Começar de novo</button>
+    </div>
+    <p class="ajuda nao-imprimir">Ao enviar o plano, vai só a resposta a estas perguntas, sem nomes nem contactos.</p>`);
 }
+
+// Ao imprimir, abre todas as partes "Ver mais" para irem para o papel.
+window.addEventListener("beforeprint", () => {
+  document.querySelectorAll("#ecra details").forEach((d) => {
+    d.dataset.estavaAberto = d.open ? "1" : "";
+    d.open = true;
+  });
+});
+window.addEventListener("afterprint", () => {
+  document.querySelectorAll("#ecra details").forEach((d) => { d.open = d.dataset.estavaAberto === "1"; });
+});
 
 // ---------- Partilhar o plano por link ----------
 // O link leva só as respostas (sem nomes nem contactos), depois do "#",
