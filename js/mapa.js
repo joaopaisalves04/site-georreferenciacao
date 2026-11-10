@@ -173,7 +173,7 @@ function criarMapa() {
     onEachFeature: (f, camada) => {
       const p = f.properties || {};
       camada.bindPopup(`<strong>Terreno já identificado no BUPi</strong><br>
-        Artigo matricial: ${escapar(p.numeromatriz || "—")}<br>
+        Número nas Finanças (artigo): ${escapar(p.numeromatriz || "—")}<br>
         Freguesia: ${escapar(p.freguesiadesc || "—")}<br>
         Área: ${p.st_area_shape_ ? fmt(p.st_area_shape_) + " m²" : "—"}<br>
         <span class="fonte">Dados abertos eBUPi (CC-BY)</span>`);
@@ -211,7 +211,7 @@ async function carregarRgg() {
     `&typeNames=Dados_Abertos_-_RGG_Continente&outputFormat=GEOJSON&count=500` +
     `&srsName=urn:ogc:def:crs:EPSG::4326&bbox=${bbox},urn:ogc:def:crs:EPSG::4326`;
   const este = ++pedidoRgg;
-  $("estado-rgg").textContent = "A carregar terrenos já identificados…";
+  $("estado-rgg").textContent = "A procurar terrenos vizinhos…";
   try {
     const r = await fetch(url);
     if (!r.ok) throw new Error(r.status);
@@ -223,8 +223,9 @@ async function carregarRgg() {
     mostrarMedidas();
     const n = (dados.features || []).length;
     $("estado-rgg").textContent = n === 0
-      ? "Nesta zona ainda não há terrenos identificados no BUPi (nos dados abertos)."
-      : `${n} terreno(s) já identificado(s) nesta zona (contorno amarelo tracejado). Toque num para ver o artigo.`;
+      ? "Aqui perto ainda não há terrenos identificados no BUPi."
+      : (n === 1 ? "Há 1 terreno vizinho já identificado (linha amarela)."
+        : `Há ${n} terrenos vizinhos já identificados (linhas amarelas).`) + " Toque num para ver os dados.";
   } catch (e) {
     if (este !== pedidoRgg) return;
     $("estado-rgg").textContent = "Não foi possível carregar os terrenos do BUPi neste momento. Tente mais tarde.";
@@ -276,26 +277,26 @@ function atualizar() {
 
 function mostrarMedidas() {
   const n = pontos.length;
-  $("n-pontos").textContent = n === 1 ? "1 canto marcado" : `${n} cantos marcados`;
-  $("comecar").textContent = n ? "✏️ Continuar a desenhar" : "✏️ Começar a desenhar";
+  $("n-pontos").textContent = n === 0 ? "Ainda não marcou nenhum canto."
+    : (n === 1 ? "1 canto marcado." : `${n} cantos marcados.`) + (n < 3 ? ` Faltam pelo menos ${3 - n}.` : "");
+  $("terminar").disabled = n < 3;
   $("desfazer").disabled = n === 0;
-  $("apagar").disabled = n === 0;
   $("exportar").disabled = n < 3;
 
   const a = areaM2(pontos);
   if (n < 3) {
     $("area").textContent = "—";
-    $("area-ha").textContent = "Marque pelo menos 3 cantos";
+    $("area-ha").textContent = "";
   } else {
     $("area").textContent = `${fmt(a)} m²`;
-    $("area-ha").textContent = `${fmt(a / 10000, 4)} hectares · perímetro ${fmt(perimetroM(pontos))} m`;
+    $("area-ha").textContent = `ou seja, ${fmt(a / 10000, 2)} hectares`;
   }
   $("aviso-cruza").hidden = !cruzaSe(pontos);
   const nSob = contarSobreposicoes();
   $("aviso-sobrepoe").hidden = nSob === 0;
-  $("aviso-sobrepoe").innerHTML = nSob === 0 ? "" : `<strong>O desenho sobrepõe-se a ${nSob === 1 ? "1 terreno já identificado" : nSob + " terrenos já identificados"}</strong>
-    no BUPi. Confirme os limites com os vizinhos: uma sobreposição faz com que a RGG fique validada «com reserva».
-    <span class="fonte">Fonte: <a href="https://bupi.gov.pt/pt/perguntas-frequentes">BUPi, Perguntas frequentes</a></span>`;
+  $("aviso-sobrepoe").innerHTML = nSob === 0 ? "" : `<strong>O desenho fica por cima de ${nSob === 1 ? "1 terreno vizinho" : nSob + " terrenos vizinhos"}</strong>
+    que já foram identificados. Confirme os limites com os vizinhos: se ficar assim, a identificação só é aceite «com reserva».
+    <a class="fonte" href="https://bupi.gov.pt/pt/perguntas-frequentes">(fonte)</a>`;
   comparar();
 }
 
@@ -311,33 +312,48 @@ function comparar() {
   const pct = (dif / caderneta) * 100;
   const sinal = dif >= 0 ? "maior" : "menor";
   let classe = "caixa caixa-ok";
-  let conselho = "O desenho e a caderneta estão próximos.";
+  let conselho = "✓ Estão muito parecidas.";
   if (Math.abs(pct) >= 10) {
     classe = "caixa caixa-aviso";
-    conselho = `Diferença grande. Confirme os cantos do desenho. Se tiver a certeza dos limites,
-      não faz mal: a caderneta pode estar desatualizada e, depois da RGG, a nova área é comunicada
-      às Finanças.`;
+    conselho = `A diferença é grande. Confirme se os cantos estão no sítio certo. Se tiver a certeza,
+      não faz mal: a caderneta pode estar errada, e a área certa é enviada às Finanças depois da identificação.`;
   } else if (Math.abs(pct) >= 3) {
     classe = "caixa";
-    conselho = "Diferença moderada, comum em esboços. Confirme os cantos com mais zoom.";
+    conselho = "Há uma pequena diferença, normal num desenho feito à mão. Pode aproximar o mapa e acertar os cantos.";
   }
   saida.innerHTML = `<div class="${classe}">
-    <p>O desenho tem <strong>${fmt(a)} m²</strong>; a caderneta diz <strong>${fmt(caderneta)} m²</strong>.</p>
-    <p>O desenho é <strong>${fmt(Math.abs(pct), 1)} % ${sinal}</strong> (${fmt(Math.abs(dif))} m²). ${conselho}</p>
-    <p class="fonte">Não existe uma margem oficial de diferença. Fonte sobre a atualização da área:
-      <a href="https://bupi.gov.pt/pt/perguntas-frequentes">BUPi, Perguntas frequentes</a>.</p></div>`;
+    <p>Desenho: <strong>${fmt(a)} m²</strong>. Caderneta: <strong>${fmt(caderneta)} m²</strong>.</p>
+    <p>O desenho é <strong>${fmt(Math.abs(pct), 0)} % ${sinal}</strong>. ${conselho}</p>
+    <a class="fonte" href="https://bupi.gov.pt/pt/perguntas-frequentes">(fonte)</a></div>`;
 }
 
 function modoDesenho(ligar) {
   aDesenhar = ligar;
   mapa.getPane("rgg").classList.toggle("sem-toque", ligar);
   if (ligar) { mapa.doubleClickZoom.disable(); mapa.closePopup(); } else mapa.doubleClickZoom.enable();
-  $("comecar").hidden = ligar;
-  $("terminar").hidden = !ligar;
   $("mapa").classList.toggle("a-desenhar", ligar);
-  $("instrucao").textContent = ligar
-    ? "Toque no mapa em cada canto do terreno, pela ordem, à volta do terreno. Pode arrastar os cantos para os acertar."
-    : (pontos.length >= 3 ? "Desenho terminado. Pode continuar a acertar os cantos, arrastando-os." : "Carregue em «Começar a desenhar».");
+}
+
+// ---------- Passos do guia (1 Encontrar, 2 Desenhar, 3 Pronto) ----------
+
+function irPasso(n) {
+  [1, 2, 3].forEach((i) => { $(`passo-${i}`).hidden = i !== n; });
+  document.querySelectorAll("[data-guia]").forEach((li) => {
+    const i = Number(li.dataset.guia);
+    li.classList.toggle("atual", i === n);
+    li.classList.toggle("feito", i < n);
+    if (i === n) li.setAttribute("aria-current", "step"); else li.removeAttribute("aria-current");
+  });
+  modoDesenho(n === 2);
+  if (n === 3 && pontos.length >= 3) mapa.fitBounds(L.latLngBounds(pontos), { maxZoom: 19, padding: [30, 30] });
+  mostrarMedidas();
+  const titulo = $(`passo-${n}`).querySelector("h2");
+  titulo.setAttribute("tabindex", "-1");
+  titulo.focus({ preventScroll: true });
+  // No telemóvel, as instruções ficam por cima do mapa: mostrar o início do passo.
+  if (window.innerWidth < 900 && document.readyState === "complete") {
+    $(`passo-${n}`).scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 }
 
 // ---------- Guardar no próprio browser ----------
@@ -433,10 +449,9 @@ function abrirKml(ficheiro) {
   leitor.onload = () => {
     try {
       pontos = lerKml(String(leitor.result));
-      modoDesenho(false);
       atualizar();
-      mapa.fitBounds(L.latLngBounds(pontos), { maxZoom: 18, padding: [30, 30] });
-      estado.textContent = `Ficheiro aberto: ${pontos.length} cantos. Pode acertá-los arrastando-os.`;
+      irPasso(3);
+      estado.textContent = `Ficheiro aberto: ${pontos.length} cantos. Para os acertar, carregue em «Corrigir o desenho».`;
       $("mapa").scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (e) {
       estado.textContent = "Não foi possível ler um terreno neste ficheiro. Confirme que é um KML com um polígono.";
@@ -499,17 +514,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   criarMapa();
   Locais.carregar().then(ligarPesquisa);
 
-  pontos = recuperar();
-  if (pontos.length) {
-    atualizar();
-    mapa.fitBounds(L.latLngBounds(pontos), { maxZoom: 18, padding: [30, 30] });
-    $("instrucao").textContent = "Recuperámos o seu último desenho, guardado neste aparelho.";
-  }
-
-  $("comecar").addEventListener("click", () => modoDesenho(true));
-  $("terminar").addEventListener("click", () => modoDesenho(false));
+  $("ir-passo-2").addEventListener("click", () => irPasso(2));
+  $("voltar-passo-1").addEventListener("click", () => irPasso(1));
+  $("terminar").addEventListener("click", () => irPasso(3));
+  $("corrigir").addEventListener("click", () => irPasso(2));
   $("desfazer").addEventListener("click", () => { pontos.pop(); atualizar(); });
-  $("apagar").addEventListener("click", () => { pontos = []; atualizar(); modoDesenho(false); });
+  $("apagar").addEventListener("click", () => { pontos = []; atualizar(); irPasso(2); });
   $("exportar").addEventListener("click", exportarKml);
   $("abrir-kml").addEventListener("change", (e) => { abrirKml(e.target.files[0]); e.target.value = ""; });
   $("area-caderneta").addEventListener("input", comparar);
@@ -522,5 +532,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     atualizarAvisoZoom();
     mostrarMedidas();
   });
-  mostrarMedidas();
+
+  // Se houver um desenho guardado neste aparelho, abre-o já no passo "Pronto".
+  pontos = recuperar();
+  if (pontos.length >= 3) {
+    atualizar();
+    irPasso(3);
+    $("estado-kml").textContent = "";
+  } else {
+    pontos = [];
+    irPasso(1);
+  }
 });
