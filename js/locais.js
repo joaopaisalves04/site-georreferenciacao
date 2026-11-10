@@ -5,6 +5,7 @@ const Locais = (() => {
   let concelhos = [];
   let freguesias = [];
   let promessa = null;
+  let promessaFreguesias = null;
 
   function normalizar(texto) {
     return texto.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
@@ -15,17 +16,23 @@ const Locais = (() => {
     return chave.startsWith(q) || chave.split(/[\s\-(),]+/).some((p) => p && p.startsWith(q));
   }
 
+  // Os concelhos (35 KB) carregam logo; as freguesias (370 KB) só quando são precisas.
   function carregar() {
     if (!promessa) {
-      promessa = Promise.all([
-        fetch("dados/concelhos.json").then((r) => r.json()),
-        fetch("dados/freguesias.json").then((r) => r.json()),
-      ]).then(([c, f]) => {
+      promessa = fetch("dados/concelhos.json").then((r) => r.json()).then((c) => {
         concelhos = c.concelhos.map((x) => ({ ...x, chave: normalizar(x.nome) }));
-        freguesias = f.freguesias.map((x) => ({ ...x, chave: normalizar(x.nome) }));
       });
     }
     return promessa;
+  }
+
+  function carregarFreguesias() {
+    if (!promessaFreguesias) {
+      promessaFreguesias = fetch("dados/freguesias.json").then((r) => r.json()).then((f) => {
+        freguesias = f.freguesias.map((x) => ({ ...x, chave: normalizar(x.nome) }));
+      }).catch(() => { promessaFreguesias = null; });
+    }
+    return promessaFreguesias;
   }
 
   function concelhoDe(nome, local) {
@@ -51,5 +58,15 @@ const Locais = (() => {
     return r.concat(f);
   }
 
-  return { carregar, procurar, normalizar, concelhoDe };
+  // Pesquisa ligada a um campo de texto: começa a carregar as freguesias à primeira
+  // tecla e repete a pesquisa quando chegam. "mostrar" recebe a lista de resultados.
+  function ligarCampo(campo, mostrar) {
+    campo.addEventListener("focus", carregarFreguesias, { once: true });
+    campo.addEventListener("input", () => {
+      mostrar(procurar(campo.value));
+      if (!freguesias.length) carregarFreguesias().then(() => mostrar(procurar(campo.value)));
+    });
+  }
+
+  return { carregar, procurar, normalizar, concelhoDe, ligarCampo };
 })();

@@ -109,16 +109,15 @@ function perguntaConcelho(p) {
     <ul id="lista-concelhos" class="opcoes"></ul>`);
 
   const campo = document.getElementById("campo-concelho");
-  campo.addEventListener("input", () => sugerirConcelhos(campo.value));
+  Locais.ligarCampo(campo, (encontrados) => sugerirConcelhos(campo.value, encontrados));
 }
 
-function sugerirConcelhos(texto) {
+function sugerirConcelhos(texto, encontrados) {
   const lista = document.getElementById("lista-concelhos");
   const estado = document.getElementById("estado-pesquisa");
   lista.innerHTML = "";
   if (Locais.normalizar(texto).length < 2) { estado.textContent = ""; return; }
 
-  const encontrados = Locais.procurar(texto);
   if (encontrados.length === 0) {
     estado.textContent = "Não encontrámos nenhum concelho ou freguesia com esse nome. Verifique a escrita.";
     return;
