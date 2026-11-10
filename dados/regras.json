@@ -144,8 +144,8 @@
     },
     {
       "id": "procuracao",
-      "texto": "Procuração do dono",
-      "detalhe": "O BUPi tem um <a href=\"https://sta-informativo.bupi.gov.pt/media/procuracao-simplificada-bupi.pdf\">modelo simplificado</a>, só para a RGG. Se o dono não puder assinar, a assinatura a rogo tem de ser reconhecida (notário, advogado, solicitador ou conservatória).",
+      "texto": "Procuração do dono (numa herança, de um dos herdeiros)",
+      "detalhe": "Quem não é dono precisa de procuração para tratar da RGG. O BUPi tem um <a href=\"https://sta-informativo.bupi.gov.pt/media/procuracao-simplificada-bupi.pdf\">modelo simplificado</a>, só para a RGG. Se o dono não puder assinar, a assinatura a rogo tem de ser reconhecida (notário, advogado, solicitador ou conservatória).",
       "satisfeito_por": ["procuracao"],
       "quando": { "para_quem": { "em": ["outro"] } },
       "fonte": ["FAQ", "PROC"]
@@ -240,6 +240,11 @@
       "fonte": ["DL87"]
     },
     {
+      "texto": "<strong>Sem documentos, trate primeiro da justificação.</strong> Antes de marcar a venda ou as partilhas, fale com a Conservatória (ou com um advogado ou solicitador): sem documentos, é preciso uma justificação de direitos para o terreno ficar em seu nome.",
+      "quando": { "dono": { "em": ["sem_papeis"] }, "objetivo": { "em": ["vender", "partilha"] } },
+      "fonte": ["DL87"]
+    },
+    {
       "texto": "<strong>Sobre as cartas:</strong> o Estado envia, de 3 em 3 meses, cartas ou emails aos donos com a localização estimada do terreno, para os incentivar a fazer a RGG. Se recebeu uma <strong>notificação do registo predial</strong>, tem {prazo_notificacao_irn} para regularizar; se não o fizer, pode começar o procedimento de «prédio sem dono conhecido».",
       "quando": { "objetivo": { "em": ["carta"] } },
       "fonte": ["DL87", "DR8"]
@@ -249,6 +254,7 @@
   "passos": [
     {
       "texto": "Veja no <a href=\"https://mapapublico.bupi.gov.pt/pesquisaprocesso/\">Mapa Público do BUPi</a> se o terreno já foi identificado por alguém.",
+      "quando": { "documentos": { "nao_contem": ["omisso"] } },
       "fonte": ["MAPA"]
     },
     {
@@ -257,7 +263,13 @@
     },
     {
       "texto": "Faça a RGG <a href=\"https://cidadao.bupi.gov.pt/\">online na plataforma do BUPi</a>, ou marque atendimento num <a href=\"https://bupi.gov.pt/pt/balcoes-bupi\">balcão BUPi</a>.",
+      "quando": { "documentos": { "nao_contem": ["omisso"] } },
       "fonte": ["PASSO", "FAQ"]
+    },
+    {
+      "texto": "Como o terreno não está nas Finanças, o primeiro passo é presencial: num <a href=\"https://bupi.gov.pt/pt/balcoes-bupi\">balcão BUPi</a>, preencha a declaração para iniciar a inscrição do terreno e a RGG provisória. Depois, entregue o requerimento nas Finanças.",
+      "quando": { "documentos": { "contem": ["omisso"] } },
+      "fonte": ["FAQ", "DL87"]
     },
     {
       "texto": "Contacte a Conservatória do Registo Predial mais próxima para tratar da justificação.",

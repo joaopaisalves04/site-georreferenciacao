@@ -132,7 +132,7 @@ function sugerirConcelhos(texto) {
 
   const encontrados = procurarConcelhos(texto);
   if (encontrados.length === 0) {
-    estado.textContent = "Não encontrámos nenhum concelho com esse nome. Verifique a escrita.";
+    estado.textContent = "Não encontrámos nenhum concelho com esse nome. Escreva o nome do concelho (não da freguesia nem da aldeia) e verifique a escrita.";
     return;
   }
   encontrados.slice(0, MAX_SUGESTOES).forEach((c) => {
