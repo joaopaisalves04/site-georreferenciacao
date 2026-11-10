@@ -51,5 +51,5 @@ const Locais = (() => {
     return r.concat(f);
   }
 
-  return { carregar, procurar, normalizar };
+  return { carregar, procurar, normalizar, concelhoDe };
 })();

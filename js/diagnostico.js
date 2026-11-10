@@ -331,9 +331,64 @@ function mostrarResultado() {
     <div class="botoes nao-imprimir">
       <a class="botao" href="mapa.html">✏️ Fazer um esboço no mapa</a>
       <button type="button" class="botao-secundario" data-acao="imprimir">Imprimir ou guardar em PDF</button>
+      <button type="button" class="botao-secundario" data-acao="partilhar">Enviar este plano a alguém</button>
       <button type="button" class="botao-secundario" data-acao="anterior">← Voltar</button>
       <button type="button" class="botao-secundario" data-acao="recomecar">Recomeçar</button>
-    </div>`);
+    </div>
+    <p id="estado-partilha" class="estado nao-imprimir" aria-live="polite"></p>
+    <p class="ajuda nao-imprimir">A ligação leva só as respostas a estas perguntas, sem nomes nem contactos.</p>`);
+}
+
+// ---------- Partilhar o plano por link ----------
+// O link leva só as respostas (sem nomes nem contactos), depois do "#",
+// que os browsers não enviam para o servidor.
+
+function linkDoPlano() {
+  const c = respostas.concelho;
+  const q = new URLSearchParams({
+    c: c.nome, l: c.local,
+    t: respostas.tipo, q: respostas.para_quem, d: respostas.dono,
+    doc: (respostas.documentos || []).join(","), o: respostas.objetivo,
+  });
+  return `${location.origin}${location.pathname}#plano?${q}`;
+}
+
+// Lê um link de plano; devolve true se as respostas forem válidas.
+function lerLinkDoPlano() {
+  const h = decodeURIComponent(location.hash || "");
+  if (!h.startsWith("#plano?")) return false;
+  const q = new URLSearchParams(h.slice("#plano?".length));
+  const c = Locais.concelhoDe(q.get("c") || "", q.get("l") || "");
+  if (!c || !c.sem_cadastro) return false;
+  const opcoes = (id) => regras.perguntas.find((p) => p.id === id).opcoes.map((o) => o.id);
+  const docs = (q.get("doc") || "").split(",").filter(Boolean);
+  const ok = opcoes("tipo").includes(q.get("t")) && q.get("t") !== "urbano"
+    && opcoes("para_quem").includes(q.get("q"))
+    && opcoes("dono").includes(q.get("d"))
+    && docs.length > 0 && docs.every((x) => opcoes("documentos").includes(x))
+    && opcoes("objetivo").includes(q.get("o"));
+  if (!ok) return false;
+  Object.assign(respostas, {
+    concelho: c, tipo: q.get("t"), para_quem: q.get("q"), dono: q.get("d"),
+    documentos: docs, objetivo: q.get("o"),
+  });
+  return true;
+}
+
+async function partilharPlano() {
+  const url = linkDoPlano();
+  const estado = document.getElementById("estado-partilha");
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: "O meu plano para identificar o terreno", url });
+      return;
+    }
+    await navigator.clipboard.writeText(url);
+    estado.innerHTML = "✓ Ligação copiada. Pode colá-la numa mensagem ou num email.";
+  } catch (e) {
+    if (e && e.name === "AbortError") return; // a pessoa cancelou
+    estado.innerHTML = `Copie esta ligação:<br><input type="text" readonly value="${escapar(url)}" onclick="this.select()">`;
+  }
 }
 
 // ---------- Arranque ----------
@@ -346,8 +401,10 @@ document.addEventListener("click", (e) => {
     else irPara(indice - 1);
   }
   else if (acao === "imprimir") window.print();
+  else if (acao === "partilhar") partilharPlano();
   else if (acao === "recomecar") {
     Object.keys(respostas).forEach((k) => delete respostas[k]);
+    if (location.hash) history.replaceState(null, "", location.pathname);
     irPara(0);
   }
 });
@@ -367,5 +424,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error(e);
     return;
   }
-  irPara(0);
+  if (lerLinkDoPlano()) mostrarResultado();
+  else irPara(0);
 });
