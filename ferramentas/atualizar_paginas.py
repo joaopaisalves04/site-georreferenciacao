@@ -50,7 +50,12 @@ def cabecalho(pagina):
         {MARCA_SVG}
         Terreno em Ordem
       </a>
-      <span class="etiqueta-teste">Versão de teste</span>
+      <div class="cabecalho-acoes">
+        <span class="etiqueta-teste">Versão de teste</span>
+        <button type="button" class="botao-letra" data-letra aria-pressed="false"
+                title="Aumentar ou diminuir o tamanho da letra">A<span aria-hidden="true">+</span>
+          <span class="so-leitor">Letra maior</span></button>
+      </div>
     </div>
     <nav class="menu contentor" aria-label="Menu principal">
 {itens}
@@ -90,6 +95,8 @@ def main():
         p.write_text(s, encoding="utf-8")
 
         # Verificações
+        if 'rel="icon"' not in s:
+            erros.append(f"{p.name}: falta o ícone (link rel=icon)")
         if 'id="conteudo"' not in s:
             erros.append(f"{p.name}: falta id=\"conteudo\" no <main>")
         if "bupi.gov.pt" not in s or "Não pertence ao Estado nem ao BUPi" not in s:

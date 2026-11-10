@@ -65,4 +65,28 @@ const Config = (() => {
   return { carregar, preencher, substituir, formatarValor };
 })();
 
+// Letra maior: a escolha fica guardada neste aparelho.
+(function () {
+  const CHAVE = "letra-grande";
+  const aplicar = (ligar) => {
+    document.documentElement.classList.toggle("letra-grande", ligar);
+    document.querySelectorAll("[data-letra]").forEach((b) => {
+      b.setAttribute("aria-pressed", String(ligar));
+      b.querySelector("[aria-hidden]").textContent = ligar ? "−" : "+";
+      b.querySelector(".so-leitor").textContent = ligar ? "Letra normal" : "Letra maior";
+    });
+  };
+  let ligado = false;
+  try { ligado = localStorage.getItem(CHAVE) === "1"; } catch (e) { /* ignora */ }
+  document.documentElement.classList.toggle("letra-grande", ligado);
+  document.addEventListener("DOMContentLoaded", () => {
+    aplicar(ligado);
+    document.querySelectorAll("[data-letra]").forEach((b) => b.addEventListener("click", () => {
+      ligado = !ligado;
+      aplicar(ligado);
+      try { localStorage.setItem(CHAVE, ligado ? "1" : "0"); } catch (e) { /* ignora */ }
+    }));
+  });
+})();
+
 document.addEventListener("DOMContentLoaded", () => Config.preencher());

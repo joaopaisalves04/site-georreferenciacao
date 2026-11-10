@@ -25,10 +25,12 @@
 [hidden] { display: none !important; }
 
 html { -webkit-text-size-adjust: 100%; }
+html.letra-grande { font-size: 120%; }
+.so-leitor { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 20px;
+  font-size: 1.25rem;   /* 20 px; aumenta com o botão «A+» */
   line-height: 1.6;
   color: var(--tinta);
   background: var(--fundo);
@@ -94,6 +96,20 @@ h3 { font-size: 1.15rem; margin: 0 0 .3em; }
   text-decoration: none;
 }
 .marca svg { width: 40px; height: 40px; flex: none; }
+.cabecalho-acoes { display: flex; align-items: center; gap: .6rem; }
+.botao-letra {
+  min-height: 44px;
+  min-width: 52px;
+  padding: .2em .7em;
+  font-size: 1.05rem;
+  font-weight: 800;
+  background: #fff;
+  color: var(--primaria);
+  border: 2px solid var(--primaria);
+  border-radius: 10px;
+}
+.botao-letra:hover { background: #eef3fa; color: var(--primaria-escura); }
+.botao-letra[aria-pressed="true"] { background: var(--primaria); color: #fff; }
 .etiqueta-teste {
   font-size: .75rem;
   font-weight: bold;
@@ -402,6 +418,18 @@ footer p { margin: .3em 0; }
   box-shadow: 0 1px 4px rgba(0, 0, 0, .4);
 }
 .painel { display: grid; gap: 1rem; }
+.medida-lado { pointer-events: none; }
+.medida-lado span {
+  display: inline-block;
+  transform: translate(-50%, -50%);
+  background: rgba(28, 36, 51, .85);
+  color: #fff;
+  font-weight: 700;
+  font-size: .8rem;
+  padding: .1em .45em;
+  border-radius: 6px;
+  white-space: nowrap;
+}
 .dica-zoom {
   margin-bottom: 30px !important;
   background: var(--tinta);
