@@ -14,13 +14,12 @@ import sys
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 
+# (página, texto, outras páginas em que esta opção fica marcada como atual)
 MENU = [
-    ("index.html", "Início"),
-    ("diagnostico.html", "Diagnóstico"),
-    ("mapa.html", "Mapa"),
-    ("perguntas.html", "Perguntas"),
-    ("glossario.html", "Glossário"),
-    ("ajuda.html", "Pedir ajuda"),
+    ("index.html", "Início", []),
+    ("diagnostico.html", "O meu terreno", []),
+    ("mapa.html", "Desenhar no mapa", []),
+    ("perguntas.html", "Ajuda", ["glossario.html", "ajuda.html"]),
 ]
 
 MARCA_SVG = """<svg viewBox="0 0 40 40" aria-hidden="true">
@@ -34,8 +33,8 @@ MARCA_SVG = """<svg viewBox="0 0 40 40" aria-hidden="true">
 
 def cabecalho(pagina):
     itens = "\n".join(
-        f'      <a href="{href}"{" aria-current=\"page\"" if href == pagina else ""}>{nome}</a>'
-        for href, nome in MENU
+        f'      <a href="{href}"{" aria-current=\"page\"" if pagina == href or pagina in outras else ""}>{nome}</a>'
+        for href, nome, outras in MENU
     )
     return f"""<!-- cabecalho -->
   <a class="saltar" href="#conteudo">Saltar para o conteúdo</a>

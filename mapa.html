@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#1c2433">
   <link rel="icon" href="img/icone.svg" type="image/svg+xml">
-  <title>Esboço do terreno no mapa · Terreno em Ordem (versão de teste)</title>
+  <title>Desenhar o terreno no mapa · Terreno em Ordem (versão de teste)</title>
   <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="css/estilo.css">
   <script src="vendor/leaflet/leaflet.js" defer></script>
@@ -44,105 +44,122 @@
     </div>
     <nav class="menu contentor" aria-label="Menu principal">
       <a href="index.html">Início</a>
-      <a href="diagnostico.html">Diagnóstico</a>
-      <a href="mapa.html" aria-current="page">Mapa</a>
-      <a href="perguntas.html">Perguntas</a>
-      <a href="glossario.html">Glossário</a>
-      <a href="ajuda.html">Pedir ajuda</a>
+      <a href="diagnostico.html">O meu terreno</a>
+      <a href="mapa.html" aria-current="page">Desenhar no mapa</a>
+      <a href="perguntas.html">Ajuda</a>
     </nav>
   </header>
   <!-- /cabecalho -->
 
   <main id="conteudo">
     <div class="contentor">
-      <h1>Esboço do terreno no mapa</h1>
+      <h1>Desenhar o terreno no mapa</h1>
+      <p class="caixa caixa-aviso aviso-esboco" role="note">
+        <strong>É só um desenho para se preparar.</strong> Não fica registado em lado nenhum
+        e não substitui a identificação no BUPi.
+      </p>
 
-      <div class="caixa caixa-aviso aviso-esboco" role="note">
-        <strong>Isto é só um esboço.</strong> Não é uma RGG, não fica registado em lado nenhum
-        e não tem valor legal. Serve para se preparar: perceber onde fica o terreno, a área aproximada
-        e levar o desenho ao balcão ou carregá-lo na plataforma do BUPi.
-      </div>
+      <ol class="guia-passos" aria-label="Passos">
+        <li data-guia="1">Encontrar</li>
+        <li data-guia="2">Desenhar</li>
+        <li data-guia="3">Pronto</li>
+      </ol>
 
       <div class="mapa-grelha">
         <div class="mapa-coluna">
           <div id="mapa" role="application" aria-label="Mapa para desenhar o terreno"></div>
-          <p id="aviso-rgg" class="nota-mapa" hidden>Aproxime mais o mapa (zoom) para ver os terrenos já identificados.</p>
+          <p id="aviso-rgg" class="nota-mapa" hidden>Aproxime mais o mapa para ver os terrenos vizinhos.</p>
           <p id="estado-rgg" class="nota-mapa" aria-live="polite"></p>
+          <p id="aviso-cruza" class="caixa caixa-aviso" hidden>Os lados do desenho cruzam-se.
+            Marque os cantos pela ordem, à volta do terreno, ou arraste-os para os acertar.</p>
+          <p id="aviso-sobrepoe" class="caixa caixa-aviso" hidden></p>
         </div>
 
         <div class="painel">
-          <section class="cartao passo-mapa">
-            <h2><span class="passo-numero">1</span> Encontre o terreno</h2>
-            <label for="procurar-local">Concelho ou freguesia</label>
+          <!-- Passo 1 -->
+          <section id="passo-1" class="cartao passo-mapa">
+            <h2><span class="passo-numero">1</span> Onde fica o terreno?</h2>
+            <label for="procurar-local">Escreva o concelho ou a freguesia</label>
             <input type="text" id="procurar-local" autocomplete="off" placeholder="Por exemplo: Lousã">
             <ul id="resultados-local" class="opcoes opcoes-compactas"></ul>
-            <div class="botoes botoes-compactos">
-              <button type="button" id="gps-ir" class="botao-secundario">📍 Estou no terreno</button>
-            </div>
+            <p class="ou">ou</p>
+            <button type="button" id="gps-ir" class="botao-secundario largura-total">📍 Estou agora no terreno</button>
             <p id="estado-gps" class="ajuda" aria-live="polite"></p>
+            <p class="ajuda">Depois, use os botões <strong>+</strong> e <strong>−</strong> do mapa
+              até ver bem o seu terreno.</p>
+            <button type="button" id="ir-passo-2" class="largura-total">Já vejo o meu terreno →</button>
+          </section>
+
+          <!-- Passo 2 -->
+          <section id="passo-2" class="cartao passo-mapa" hidden>
+            <h2><span class="passo-numero">2</span> Toque nos cantos do terreno</h2>
+            <p id="instrucao">Toque no mapa em cada canto do terreno, um a seguir ao outro, à volta.
+              Se errar, carregue em «Desfazer».</p>
+            <p id="n-pontos" class="contador-cantos" aria-live="polite"></p>
+            <button type="button" id="terminar" class="largura-total" disabled>✓ Já marquei todos os cantos</button>
+            <div class="botoes botoes-compactos">
+              <button type="button" id="desfazer" class="botao-secundario">↶ Desfazer</button>
+              <button type="button" id="voltar-passo-1" class="botao-secundario">← Voltar</button>
+            </div>
+            <details class="mais">
+              <summary>Está no terreno com o telemóvel?</summary>
+              <p class="ajuda">Vá a cada canto do terreno e carregue no botão. O telemóvel marca o sítio onde está.</p>
+              <button type="button" id="gps-canto" class="botao-secundario largura-total">📍 Marcar o canto onde estou</button>
+            </details>
+          </section>
+
+          <!-- Passo 3 -->
+          <section id="passo-3" class="cartao passo-mapa" hidden>
+            <h2><span class="passo-numero">3</span> Pronto!</h2>
+            <p>O seu terreno tem cerca de:</p>
+            <div class="custo custo-destaque area-final">
+              <span class="valor" id="area">—</span>
+              <span class="rotulo" id="area-ha"></span>
+            </div>
+            <button type="button" id="exportar" class="largura-total">💾 Guardar o desenho</button>
+            <p class="ajuda">Guarda um ficheiro no seu aparelho. Pode levá-lo ao balcão BUPi ou usá-lo no site do BUPi.</p>
+
+            <details class="mais">
+              <summary>Comparar com a área da caderneta</summary>
+              <label for="area-caderneta">Área que aparece na caderneta</label>
+              <div class="linha-campos">
+                <input type="text" id="area-caderneta" inputmode="decimal" placeholder="Ex.: 2500">
+                <select id="unidade-caderneta" aria-label="Unidade da área">
+                  <option value="m2">m²</option>
+                  <option value="ha">hectares</option>
+                </select>
+              </div>
+              <div id="comparacao" aria-live="polite"></div>
+            </details>
+
+            <div class="botoes botoes-compactos">
+              <button type="button" id="corrigir" class="botao-secundario">✏️ Corrigir o desenho</button>
+              <button type="button" id="apagar" class="botao-secundario">Fazer outro desenho</button>
+            </div>
+          </section>
+
+          <details class="mais cartao-mais">
+            <summary>Mais opções</summary>
             <label class="opcao-marcar opcao-pequena">
               <input type="checkbox" id="ver-rgg">
-              <span>Mostrar terrenos vizinhos já identificados no BUPi</span>
+              <span>Mostrar terrenos vizinhos que já foram identificados no BUPi</span>
             </label>
-          </section>
-
-          <section class="cartao passo-mapa">
-            <h2><span class="passo-numero">2</span> Marque os cantos</h2>
-            <p id="instrucao" class="ajuda">Carregue em «Começar a desenhar».</p>
-            <div class="botoes botoes-compactos">
-              <button type="button" id="comecar">✏️ Começar a desenhar</button>
-              <button type="button" id="terminar" hidden>✓ Terminar desenho</button>
-              <button type="button" id="desfazer" class="botao-secundario">↶ Desfazer último</button>
-              <button type="button" id="apagar" class="botao-secundario">Apagar tudo</button>
-            </div>
-            <p class="ajuda">No terreno, com o telemóvel, também pode ir a cada canto e carregar em:</p>
-            <button type="button" id="gps-canto" class="botao-secundario">📍 Marcar o canto onde estou</button>
-            <p id="n-pontos" class="estado"></p>
-            <p id="aviso-cruza" class="caixa caixa-aviso" hidden>Os lados do desenho cruzam-se.
-              Marque os cantos pela ordem, à volta do terreno, ou arraste-os para corrigir.</p>
-            <p id="aviso-sobrepoe" class="caixa caixa-aviso" hidden></p>
-          </section>
-
-          <section class="cartao passo-mapa">
-            <h2><span class="passo-numero">3</span> Área e comparação</h2>
-            <div class="custo custo-destaque">
-              <span class="valor" id="area">—</span>
-              <span class="rotulo" id="area-ha">Marque pelo menos 3 cantos</span>
-            </div>
-            <label for="area-caderneta" class="espaco-topo">Área que aparece na caderneta (opcional)</label>
-            <div class="linha-campos">
-              <input type="text" id="area-caderneta" inputmode="decimal" placeholder="Ex.: 2500">
-              <select id="unidade-caderneta" aria-label="Unidade da área">
-                <option value="m2">m²</option>
-                <option value="ha">hectares</option>
-              </select>
-            </div>
-            <div id="comparacao" aria-live="polite"></div>
-          </section>
-
-          <section class="cartao passo-mapa">
-            <h2><span class="passo-numero">4</span> Guardar ou abrir um desenho</h2>
-            <label for="nome-terreno">Nome para o ficheiro (opcional)</label>
+            <label for="nome-terreno" class="espaco-topo">Nome do ficheiro ao guardar</label>
             <input type="text" id="nome-terreno" placeholder="Ex.: Pinhal da Ribeira" maxlength="60">
-            <div class="botoes botoes-compactos">
-              <button type="button" id="exportar">⬇ Descarregar ficheiro KML</button>
-            </div>
             <input type="file" id="abrir-kml" accept=".kml,.kmz,application/vnd.google-earth.kml+xml" class="so-leitor">
-            <label class="botao botao-secundario botao-ficheiro" for="abrir-kml">📂 Abrir um ficheiro KML que já tenho</label>
+            <label class="botao botao-secundario botao-ficheiro" for="abrir-kml">📂 Abrir um desenho guardado (ficheiro KML)</label>
             <p id="estado-kml" class="estado" aria-live="polite"></p>
-            <p class="ajuda">O ficheiro KML abre no Google Earth e pode ser carregado na plataforma do BUPi
-              como ponto de partida. O desenho fica também guardado neste aparelho. Os ficheiros que abre
-              são lidos só no seu aparelho: não são enviados para nenhum servidor.</p>
-          </section>
+            <p class="ajuda">Os ficheiros que abre são lidos só no seu aparelho: não são enviados para lado nenhum.</p>
+          </details>
         </div>
       </div>
 
-      <h2>Antes de usar o desenho</h2>
+      <h2>Bom saber</h2>
       <ul class="lista-cuidados">
-        <li>As fotografias aéreas podem ter alguns metros de desvio. Confirme os cantos no terreno sempre que puder.</li>
-        <li>Não inclua caminhos, estradas ou ribeiras dentro do desenho: isso leva à recusa da RGG ou a um ajuste
-          automático. <span class="fonte">Fonte: <a href="https://bupi.gov.pt/pt/perguntas-frequentes">BUPi, Perguntas frequentes</a></span></li>
-        <li>Os terrenos vizinhos mostrados vêm dos dados abertos do BUPi e podem não estar completos nem atualizados.</li>
+        <li>As fotografias aéreas podem ter alguns metros de desvio. Se puder, confirme os cantos no terreno.</li>
+        <li>Não ponha caminhos, estradas ou ribeiras dentro do desenho: a identificação pode ser recusada.
+          <a class="fonte" href="https://bupi.gov.pt/pt/perguntas-frequentes">(fonte)</a></li>
+        <li>O desenho fica guardado neste aparelho, para não o perder.</li>
       </ul>
     </div>
   </main>
