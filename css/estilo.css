@@ -360,15 +360,17 @@ footer p { margin: .3em 0; }
 
 
 /* ---------- Menu ---------- */
-.menu {
+.cabecalho .menu {
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   gap: .3rem;
   overflow-x: auto;
   padding-top: 0;
   padding-bottom: .6rem;
   scrollbar-width: none;
 }
-.menu a {
+.cabecalho .menu a {
   flex: none;
   font-weight: 600;
   font-size: .95rem;
@@ -380,8 +382,8 @@ footer p { margin: .3em 0; }
   display: inline-flex;
   align-items: center;
 }
-.menu a:hover { background: var(--fundo); color: var(--tinta); }
-.menu a[aria-current="page"] { background: var(--primaria); color: #fff; }
+.cabecalho .menu a:hover { background: var(--fundo); color: var(--tinta); }
+.cabecalho .menu a[aria-current="page"] { background: var(--primaria); color: #fff; }
 
 /* ---------- Mapa ---------- */
 .mapa-grelha {
@@ -464,10 +466,20 @@ select {
 
 @media (max-width: 900px) {
   .mapa-grelha { grid-template-columns: 1fr; }
+  /* No telemóvel: instruções do passo, depois o mapa, depois «Mais opções». */
+  .painel { display: contents; }
+  .passo-mapa { order: -1; }
+  .cartao-mais { order: 2; }
   .mapa-coluna { position: static; }
   #mapa { height: 62vh; }
 }
 
+
+/* ---------- Página inicial simplificada ---------- */
+.botao-grande { font-size: 1.3rem; min-height: 68px; padding: .8em 2em; margin-top: .6rem; }
+.grelha-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+.nota-confianca { margin-top: 2rem; }
+main > .destaque { margin-top: -2rem; margin-bottom: 1rem; }
 
 /* ---------- Cartões que são ligações (página inicial) ---------- */
 .cartao-ligacao {
@@ -560,10 +572,45 @@ textarea:focus, select:focus { border-color: var(--primaria); outline: 4px solid
 .consentimento input { margin-top: .2rem; }
 .armadilha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
+/* ---------- Mapa: guia em 3 passos ---------- */
+.guia-passos {
+  list-style: none;
+  display: flex;
+  gap: .5rem;
+  padding: 0;
+  margin: 1rem 0 0;
+  counter-reset: guia;
+}
+.guia-passos li {
+  counter-increment: guia;
+  flex: 1;
+  text-align: center;
+  font-weight: 700;
+  font-size: .95rem;
+  color: var(--tinta-suave);
+  padding: .5rem .3rem;
+  border-bottom: 5px solid var(--linha);
+}
+.guia-passos li::before { content: counter(guia) ". "; }
+.guia-passos li.feito { color: var(--verde); border-color: var(--verde); }
+.guia-passos li.feito::before { content: "✓ "; }
+.guia-passos li.atual { color: var(--tinta); border-color: var(--terra); }
+.largura-total { width: 100%; margin-top: .8rem; }
+.ou { text-align: center; color: var(--tinta-suave); margin: .6rem 0 0; font-weight: 600; }
+.contador-cantos { font-size: 1.15rem; font-weight: 800; margin: .8rem 0; }
+.area-final .valor { font-size: 2.2rem; }
+.cartao-mais { background: #fff; }
+.passo-mapa h2:focus { outline: none; }
+.passo-mapa p { margin: .5rem 0; }
+
+/* ---------- Ajuda: atalhos no topo ---------- */
+.titulo-cartao { font-size: 1.15rem; margin: .2rem 0 0; }
+.atalhos-ajuda { display: grid; gap: .8rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin: 1rem 0 2rem; }
+
 /* ---------- Telemóvel ---------- */
 @media (max-width: 480px) {
-  .menu { flex-wrap: wrap; overflow: visible; gap: .25rem; }
-  .menu a { font-size: .9rem; padding: .35em .75em; min-height: 40px; }
+  .cabecalho .menu { display: grid; grid-template-columns: 1fr 1fr; overflow: visible; gap: .3rem; }
+  .cabecalho .menu a { font-size: .95rem; padding: .35em .75em; min-height: 44px; justify-content: center; text-align: center; }
   .leaflet-control-attribution { font-size: .65rem !important; max-width: 70%; }
   .leaflet-control-layers-toggle { width: 44px !important; height: 44px !important; }
   .cartao { padding: 1.2rem 1rem; }
@@ -652,6 +699,56 @@ textarea:focus, select:focus { border-color: var(--primaria); outline: 4px solid
 .resumo li { margin: .3rem 0; color: var(--tinta-suave); }
 .resumo li strong { color: var(--tinta); }
 
+/* ---------- Resultado simplificado ---------- */
+.resumo-plano { list-style: none; counter-reset: bloco; padding: 0; margin: 1.2rem 0; display: grid; gap: 1rem; }
+.resumo-plano > li {
+  counter-increment: bloco;
+  position: relative;
+  border: 2px solid var(--linha);
+  border-radius: 16px;
+  padding: 1rem 1.2rem 1rem 4.2rem;
+}
+.resumo-plano > li::before {
+  content: counter(bloco);
+  position: absolute;
+  left: 1.1rem;
+  top: 1rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--primaria);
+  color: #fff;
+  font-weight: 800;
+}
+.resumo-plano h2 { margin: .2rem 0 .5rem; font-size: 1.25rem; }
+.resumo-plano p { margin: .3rem 0; }
+.resumo-plano ul, .resumo-plano ol { margin: .3rem 0; padding-left: 1.3rem; }
+.resumo-plano li li { margin-bottom: .5rem; }
+.lista-falta li::marker { color: var(--terra); }
+.lista-falta { font-weight: 600; }
+.tudo-ok, .ja-tem { color: var(--verde); font-weight: 600; }
+.lista-custos { list-style: none; padding-left: 0 !important; }
+.caixa-importante { background: var(--terra-clara); border: 2px solid #e8b9a3; }
+.titulo-mais { margin-top: 2rem; }
+details.mais, details.fontes {
+  border: 2px solid var(--linha);
+  border-radius: 14px;
+  padding: 0 1rem;
+  margin: .6rem 0;
+  background: #fff;
+}
+details.mais > summary, details.fontes > summary {
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+}
+details.mais[open], details.fontes[open] { padding-bottom: 1rem; }
+details.mais .lista-docs { margin-top: .5rem; }
+
 /* ---------- Impressão ---------- */
 @media print {
   body { font-size: 12pt; background: #fff; }
@@ -661,5 +758,7 @@ textarea:focus, select:focus { border-color: var(--primaria); outline: 4px solid
   .cartao { box-shadow: none; padding: 0; }
   .doc, .custo, .caixa { break-inside: avoid; }
   .resumo { display: none; }
+  details.mais > summary, details.fontes > summary { min-height: 0; }
+  .resumo-plano > li { break-inside: avoid; }
   a { color: #000; }
 }
