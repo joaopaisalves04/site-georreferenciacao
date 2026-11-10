@@ -8,9 +8,12 @@
   <title>Diagnóstico do terreno · Terreno em Ordem (versão de teste)</title>
   <link rel="stylesheet" href="css/estilo.css">
   <script src="js/comum.js" defer></script>
+  <script src="js/locais.js" defer></script>
   <script src="js/diagnostico.js" defer></script>
 </head>
 <body>
+<!-- cabecalho -->
+  <a class="saltar" href="#conteudo">Saltar para o conteúdo</a>
   <div class="aviso-topo" role="note">
     Serviço privado e independente. Não pertence ao Estado nem ao BUPi.
     Site oficial: <a href="https://bupi.gov.pt">bupi.gov.pt</a>
@@ -30,9 +33,18 @@
       </a>
       <span class="etiqueta-teste">Versão de teste</span>
     </div>
+    <nav class="menu contentor" aria-label="Menu principal">
+      <a href="index.html">Início</a>
+      <a href="diagnostico.html" aria-current="page">Diagnóstico</a>
+      <a href="mapa.html">Mapa</a>
+      <a href="perguntas.html">Perguntas</a>
+      <a href="glossario.html">Glossário</a>
+      <a href="ajuda.html">Pedir ajuda</a>
+    </nav>
   </header>
+  <!-- /cabecalho -->
 
-  <main>
+  <main id="conteudo">
     <div class="contentor contentor-estreito">
       <a class="voltar" href="index.html">← Início</a>
 
@@ -47,11 +59,20 @@
     </div>
   </main>
 
+<!-- rodape -->
   <footer>
     <div class="contentor">
-      <p>Valores legais verificados em <span data-data-verificacao>novembro de 2026</span>.</p>
-      <p>Informação orientativa: não substitui o atendimento do BUPi ou da câmara municipal.</p>
+      <p><strong>Terreno em Ordem</strong> é um serviço privado e independente, sem ligação ao Estado nem ao BUPi.
+        Não faz, não valida e não regista a identificação de terrenos.</p>
+      <p>Valores legais verificados em <span data-data-verificacao>novembro de 2026</span>.
+        Informação orientativa: não substitui o atendimento do BUPi ou da câmara municipal.</p>
+      <p class="rodape-links">
+        <a href="sobre.html">Sobre este site</a>
+        <a href="privacidade.html">Privacidade</a>
+        <a href="https://bupi.gov.pt">Site oficial do BUPi</a>
+      </p>
     </div>
   </footer>
+  <!-- /rodape -->
 </body>
 </html>

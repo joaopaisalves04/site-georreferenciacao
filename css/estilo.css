@@ -22,6 +22,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 html { -webkit-text-size-adjust: 100%; }
 
@@ -45,6 +46,20 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; }
 h1 { font-size: clamp(1.75rem, 5vw, 2.6rem); margin: 0 0 .5em; }
 h2 { font-size: 1.4rem; margin: 1.6em 0 .5em; }
 h3 { font-size: 1.15rem; margin: 0 0 .3em; }
+
+/* ---------- Saltar para o conteúdo (teclado) ---------- */
+.saltar {
+  position: absolute;
+  left: -9999px;
+  top: .5rem;
+  background: var(--foco);
+  color: var(--tinta);
+  font-weight: 700;
+  padding: .6em 1em;
+  border-radius: 8px;
+  z-index: 1000;
+}
+.saltar:focus { left: .5rem; }
 
 /* ---------- Faixa "serviço privado" ---------- */
 .aviso-topo {
@@ -324,9 +339,203 @@ footer {
   color: var(--tinta-suave);
 }
 footer p { margin: .3em 0; }
+.rodape-links { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; margin-top: .8em !important; }
+.rodape-links a { font-weight: 600; }
+
+
+/* ---------- Menu ---------- */
+.menu {
+  display: flex;
+  gap: .3rem;
+  overflow-x: auto;
+  padding-top: 0;
+  padding-bottom: .6rem;
+  scrollbar-width: none;
+}
+.menu a {
+  flex: none;
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--tinta-suave);
+  text-decoration: none;
+  padding: .45em .9em;
+  border-radius: 999px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.menu a:hover { background: var(--fundo); color: var(--tinta); }
+.menu a[aria-current="page"] { background: var(--primaria); color: #fff; }
+
+/* ---------- Mapa ---------- */
+.mapa-grelha {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr);
+  gap: 1.2rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+.mapa-coluna { position: sticky; top: 1rem; }
+#mapa {
+  height: min(75vh, 720px);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  z-index: 0;
+}
+#mapa.a-desenhar { cursor: crosshair; outline: 4px solid var(--terra); outline-offset: 2px; }
+#mapa.a-desenhar .leaflet-grab { cursor: crosshair; }
+.leaflet-container { font: inherit; font-size: .9rem; }
+.leaflet-control-layers { font-size: .95rem; }
+.leaflet-control-layers label { font-weight: 400; margin: .2em 0; }
+.leaflet-bar a { width: 40px !important; height: 40px !important; line-height: 40px !important; font-size: 22px !important; }
+.vertice span {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #ff6b2c;
+  color: var(--tinta);
+  font-weight: 800;
+  font-size: .8rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .4);
+}
+.painel { display: grid; gap: 1rem; }
+.dica-zoom {
+  margin-bottom: 30px !important;
+  background: var(--tinta);
+  color: #fff;
+  font-weight: 700;
+  padding: .4em .8em;
+  border-radius: 8px;
+  font-size: .9rem;
+}
+.sem-toque, .sem-toque * { pointer-events: none !important; }
+.passo-mapa h2 { display: flex; align-items: center; gap: .6rem; margin: 0 0 .8rem; font-size: 1.2rem; }
+.passo-mapa .passo-numero { margin: 0; width: 36px; height: 36px; flex: none; }
+.nota-mapa { font-size: .95rem; color: var(--tinta-suave); margin: .5rem 0 0; }
+.opcoes-compactas button { padding: .6em .9em; min-height: 48px; }
+.botoes-compactos { margin-top: .8rem; gap: .5rem; }
+.botoes-compactos button, .passo-mapa > button { min-height: 50px; padding: .5em 1em; font-size: 1rem; }
+.opcao-pequena { font-weight: 600; font-size: 1rem; margin-top: .8rem; }
+.linha-campos { display: flex; gap: .5rem; }
+.linha-campos input { flex: 1; }
+select {
+  font: inherit;
+  padding: .6em;
+  border: 2px solid #8b93a3;
+  border-radius: 12px;
+  background: #fff;
+  min-height: 56px;
+}
+.espaco-topo { margin-top: 1rem; }
+.aviso-esboco { font-size: 1rem; }
+
+@media (max-width: 900px) {
+  .mapa-grelha { grid-template-columns: 1fr; }
+  .mapa-coluna { position: static; }
+  #mapa { height: 62vh; }
+}
+
+
+/* ---------- Cartões que são ligações (página inicial) ---------- */
+.cartao-ligacao {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  text-decoration: none;
+  color: var(--tinta);
+  border: 2px solid transparent;
+  transition: transform .15s, border-color .15s, box-shadow .15s;
+}
+.cartao-ligacao:hover { transform: translateY(-2px); border-color: var(--primaria); }
+.cartao-ligacao h3 { margin: .2rem 0 0; }
+.cartao-ligacao .seta { margin-top: auto; padding-top: .6rem; font-weight: 700; color: var(--primaria); }
+.icone-ferramenta {
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #e6edf6;
+  color: var(--primaria);
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+/* ---------- Páginas de texto ---------- */
+.lead-pagina { font-size: 1.15rem; color: var(--tinta-suave); }
+.texto-longo li { margin-bottom: .4rem; }
+.lista-ligacoes a { font-weight: 600; }
+
+/* Perguntas frequentes */
+.faq { display: grid; gap: .7rem; }
+.faq details {
+  background: var(--cartao);
+  border: 2px solid var(--linha);
+  border-radius: 14px;
+  padding: 0 1.1rem;
+}
+.faq details[open] { border-color: var(--primaria); box-shadow: var(--sombra); }
+.faq summary {
+  font-weight: 700;
+  cursor: pointer;
+  padding: .9rem 0;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 1.6rem; color: var(--primaria); flex: none; }
+.faq details[open] summary::after { content: "−"; }
+.faq details > :last-child { margin-bottom: 1rem; }
+
+/* Glossário */
+.glossario { margin: 1.2rem 0 0; display: grid; gap: .8rem; }
+.termo {
+  background: var(--cartao);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  border: 2px solid var(--linha);
+}
+.termo dt { font-weight: 800; font-size: 1.1rem; }
+.termo dd { margin: .3rem 0 0; color: var(--tinta-suave); }
+.termo .fonte { display: block; margin-top: .4rem; }
+
+/* Formulário */
+.formulario { display: grid; gap: 1.3rem; margin-top: 1rem; }
+.campo { margin: 0; }
+fieldset.campo { border: 0; padding: 0; }
+legend { font-weight: 700; margin-bottom: .5em; padding: 0; }
+.escolhas-lado { display: flex; gap: .7rem; flex-wrap: wrap; }
+.escolhas-lado .opcao-marcar { flex: 1; min-width: 140px; }
+textarea {
+  width: 100%;
+  font: inherit;
+  padding: .8em 1em;
+  border: 2px solid #8b93a3;
+  border-radius: 12px;
+  resize: vertical;
+}
+select { width: 100%; }
+.linha-campos select { width: auto; }
+textarea:focus, select:focus { border-color: var(--primaria); outline: 4px solid var(--foco); outline-offset: 2px; }
+[aria-invalid="true"] { border-color: #b3261e !important; }
+.erro { color: #b3261e; font-weight: 700; margin: .4em 0 0; }
+.consentimento { font-weight: 400; align-items: flex-start; }
+.consentimento input { margin-top: .2rem; }
+.armadilha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 /* ---------- Telemóvel ---------- */
 @media (max-width: 480px) {
+  .menu { flex-wrap: wrap; overflow: visible; gap: .25rem; }
+  .menu a { font-size: .9rem; padding: .35em .75em; min-height: 40px; }
+  .leaflet-control-attribution { font-size: .65rem !important; max-width: 70%; }
+  .leaflet-control-layers-toggle { width: 44px !important; height: 44px !important; }
   .cartao { padding: 1.2rem 1rem; }
   .contentor { padding-left: .9rem; padding-right: .9rem; }
   main { padding-top: 1.2rem; }

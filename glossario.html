@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1c2433">
+  <title>Glossário · Terreno em Ordem (versão de teste)</title>
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/comum.js" defer></script>
+</head>
+<body>
+<!-- cabecalho -->
+  <a class="saltar" href="#conteudo">Saltar para o conteúdo</a>
+  <div class="aviso-topo" role="note">
+    Serviço privado e independente. Não pertence ao Estado nem ao BUPi.
+    Site oficial: <a href="https://bupi.gov.pt">bupi.gov.pt</a>
+  </div>
+
+  <header class="cabecalho">
+    <div class="contentor">
+      <a class="marca" href="index.html">
+        <svg viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#1f3a5f"/>
+          <path d="M9 27 L14 11 L29 9 L32 24 L19 31 Z" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle cx="9" cy="27" r="2.6" fill="#f2a27c"/><circle cx="14" cy="11" r="2.6" fill="#f2a27c"/>
+          <circle cx="29" cy="9" r="2.6" fill="#f2a27c"/><circle cx="32" cy="24" r="2.6" fill="#f2a27c"/>
+          <circle cx="19" cy="31" r="2.6" fill="#f2a27c"/>
+        </svg>
+        Terreno em Ordem
+      </a>
+      <span class="etiqueta-teste">Versão de teste</span>
+    </div>
+    <nav class="menu contentor" aria-label="Menu principal">
+      <a href="index.html">Início</a>
+      <a href="diagnostico.html">Diagnóstico</a>
+      <a href="mapa.html">Mapa</a>
+      <a href="perguntas.html">Perguntas</a>
+      <a href="glossario.html" aria-current="page">Glossário</a>
+      <a href="ajuda.html">Pedir ajuda</a>
+    </nav>
+  </header>
+  <!-- /cabecalho -->
+
+  <main id="conteudo">
+    <div class="contentor contentor-estreito">
+      <h1>Glossário</h1>
+      <p class="lead-pagina">As palavras difíceis do processo, explicadas de forma simples.</p>
+      <label for="filtro-glossario">Procurar uma palavra</label>
+      <input type="text" id="filtro-glossario" autocomplete="off" placeholder="Por exemplo: caderneta">
+      <p id="sem-termos" class="estado" hidden>Nenhuma palavra encontrada.</p>
+      <dl class="glossario">
+        <div class="termo" id="anexacao">
+          <dt>Anexação</dt>
+          <dd>Juntar dois ou mais prédios num só. Para terrenos rústicos há um procedimento especial no BUPi.
+            <span class="fonte">Fonte: <a href="https://diariodarepublica.pt/dr/detalhe/decreto-lei/87-2026-1085738183">Decreto-Lei 87/2026</a></span></dd>
+        </div>
+        <div class="termo" id="bupi">
+          <dt>BUPi</dt>
+          <dd>Balcão Único do Prédio. Serviço público, online e presencial, para identificar os terrenos rústicos e mistos nos concelhos sem cadastro.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="cabeca-de-casal">
+          <dt>Cabeça de casal</dt>
+          <dd>A pessoa que administra a herança até às partilhas.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="cadastro-predial">
+          <dt>Cadastro predial</dt>
+          <dd>O registo oficial e geométrico dos prédios, gerido pela Direção-Geral do Território (DGT). Existe em parte do país; onde existe, não se usa o BUPi.
+            <span class="fonte">Fonte: <a href="https://bupi.gov.pt/pt/perguntas-frequentes">BUPi, Perguntas frequentes</a>; <a href="https://diariodarepublica.pt/dr/detalhe/decreto-lei/87-2026-1085738183">Decreto-Lei 87/2026</a></span></dd>
+        </div>
+        <div class="termo" id="caderneta-predial">
+          <dt>Caderneta predial</dt>
+          <dd>Documento das Finanças com os dados do prédio: localização, artigo, área e titulares. É a base do processo no BUPi. Obtém-se de graça no Portal das Finanças.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="cgp">
+          <dt>CGP</dt>
+          <dd>Configuração Geométrica do Prédio: o equivalente à RGG nos concelhos com cadastro.
+            <span class="fonte">Fonte: <a href="https://bupi.gov.pt/pt/perguntas-frequentes">BUPi, Perguntas frequentes</a></span></dd>
+        </div>
+        <div class="termo" id="chave-movel-digital">
+          <dt>Chave Móvel Digital</dt>
+          <dd>Forma de se autenticar nos serviços do Estado com o telemóvel. É pedida pelo BUPi, nunca por este site.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="comproprietario">
+          <dt>Comproprietário</dt>
+          <dd>Cada um dos donos de um prédio com vários donos, cada um com a sua parte (quota), por exemplo metade.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="conciliacao-administrativa">
+          <dt>Conciliação administrativa</dt>
+          <dd>Procedimento para resolver sobreposições entre vizinhos, com a ajuda de um conciliador.
+            <span class="fonte">Fonte: <a href="https://diariodarepublica.pt/dr/detalhe/decreto-regulamentar/8-2026-1172217158">Decreto Regulamentar 8/2026</a></span></dd>
+        </div>
+        <div class="termo" id="confinante">
+          <dt>Confinante</dt>
+          <dd>Prédio (ou dono de prédio) que faz estrema com o nosso.
+            <span class="fonte">Fonte: <a href="https://diariodarepublica.pt/dr/detalhe/decreto-regulamentar/8-2026-1172217158">Decreto Regulamentar 8/2026</a></span></dd>
+        </div>
+        <div class="termo" id="confrontacoes">
+          <dt>Confrontações</dt>
+          <dd>Na caderneta, a indicação do que está à volta do terreno: vizinhos, caminhos, ribeiras…
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="conservatoria">
+          <dt>Conservatória</dt>
+          <dd>Serviço onde se faz o registo predial. A RGG não substitui o registo.
+            <span class="fonte">Fonte: <a href="https://bupi.gov.pt/pt/passo-a-passo">BUPi, Passo a passo</a></span></dd>
+        </div>
+        <div class="termo" id="dominio-publico">
+          <dt>Domínio público</dt>
+          <dd>Bens de uso público, como estradas, caminhos públicos e linhas de água. O desenho do terreno não os pode invadir.
+            <span class="fonte">Fonte: <a href="https://bupi.gov.pt/pt/perguntas-frequentes">BUPi, Perguntas frequentes</a>; <a href="https://diariodarepublica.pt/dr/detalhe/decreto-regulamentar/8-2026-1172217158">Decreto Regulamentar 8/2026</a></span></dd>
+        </div>
+        <div class="termo" id="estremas">
+          <dt>Estremas</dt>
+          <dd>Os limites do terreno.
+            <span class="fonte">Fonte: <a href="https://diariodarepublica.pt/dr/detalhe/decreto-regulamentar/8-2026-1172217158">Decreto Regulamentar 8/2026</a></span></dd>
+        </div>
+        <div class="termo" id="habilitacao-de-herdeiros">
+          <dt>Habilitação de herdeiros</dt>
+          <dd>Documento que declara quem são os herdeiros de uma pessoa.
+            <span class="fonte">Fonte: <a href="https://bupi.gov.pt/pt/perguntas-frequentes">BUPi, Perguntas frequentes</a></span></dd>
+        </div>
+        <div class="termo" id="heranca-indivisa">
+          <dt>Herança indivisa</dt>
+          <dd>Herança ainda não partilhada. Tem um NIF próprio.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="justificacao-de-direitos">
+          <dt>Justificação de direitos</dt>
+          <dd>Procedimento para provar que se é dono quando não há documentos, por exemplo por usucapião. Trata-se na Conservatória.
+            <span class="fonte">Fonte: <a href="https://bupi.gov.pt/pt/perguntas-frequentes">BUPi, Perguntas frequentes</a>; <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="matriz--artigo-matricial">
+          <dt>Matriz / artigo matricial</dt>
+          <dd>A matriz é o registo dos prédios nas Finanças. O artigo matricial é o número do prédio nessa matriz.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="predio-misto">
+          <dt>Prédio misto</dt>
+          <dd>Prédio com uma parte rústica e uma parte urbana. Identifica-se inteiro no BUPi.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a>; <a href="https://diariodarepublica.pt/dr/detalhe/decreto-regulamentar/8-2026-1172217158">Decreto Regulamentar 8/2026</a></span></dd>
+        </div>
+        <div class="termo" id="predio-omisso">
+          <dt>Prédio omisso</dt>
+          <dd>Prédio que não está inscrito nas Finanças (não tem artigo) ou não está descrito no registo predial.
+            <span class="fonte">Fonte: <a href="https://diariodarepublica.pt/dr/detalhe/decreto-lei/87-2026-1085738183">Decreto-Lei 87/2026</a></span></dd>
+        </div>
+        <div class="termo" id="predio-rustico">
+          <dt>Prédio rústico</dt>
+          <dd>Terreno destinado a fins agrícolas ou florestais.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="predio-sem-dono-conhecido">
+          <dt>Prédio sem dono conhecido</dt>
+          <dd>Procedimento do Estado para prédios cujo dono não aparece depois de ser notificado.
+            <span class="fonte">Fonte: <a href="https://diariodarepublica.pt/dr/detalhe/decreto-regulamentar/8-2026-1172217158">Decreto Regulamentar 8/2026</a></span></dd>
+        </div>
+        <div class="termo" id="predio-urbano">
+          <dt>Prédio urbano</dt>
+          <dd>Prédio destinado a habitação, comércio ou indústria. Não se identifica no BUPi.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="procuracao">
+          <dt>Procuração</dt>
+          <dd>Documento em que uma pessoa autoriza outra a tratar de assuntos em seu nome. O BUPi tem um modelo simplificado, só para a RGG.
+            <span class="fonte">Fonte: <a href="https://bupi.gov.pt/pt/perguntas-frequentes">BUPi, Perguntas frequentes</a>; <a href="https://sta-informativo.bupi.gov.pt/media/procuracao-simplificada-bupi.pdf">BUPi, Modelo de procuração</a></span></dd>
+        </div>
+        <div class="termo" id="registo-predial">
+          <dt>Registo predial</dt>
+          <dd>Registo público que dá segurança jurídica à propriedade. Faz-se na Conservatória, depois da RGG.
+            <span class="fonte">Fonte: <a href="https://bupi.gov.pt/pt/passo-a-passo">BUPi, Passo a passo</a></span></dd>
+        </div>
+        <div class="termo" id="rgg">
+          <dt>RGG</dt>
+          <dd>Representação Gráfica Georreferenciada: o desenho dos limites do terreno sobre um mapa, com coordenadas.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a>; <a href="https://diariodarepublica.pt/dr/detalhe/decreto-regulamentar/8-2026-1172217158">Decreto Regulamentar 8/2026</a></span></dd>
+        </div>
+        <div class="termo" id="tecnico-habilitado">
+          <dt>Técnico habilitado</dt>
+          <dd>Profissional registado no BUPi que valida as RGG ou as faz consigo no balcão.
+            <span class="fonte">Fonte: <a href="https://diariodarepublica.pt/dr/detalhe/decreto-regulamentar/8-2026-1172217158">Decreto Regulamentar 8/2026</a></span></dd>
+        </div>
+        <div class="termo" id="titular">
+          <dt>Titular</dt>
+          <dd>A pessoa que aparece na caderneta como dona do prédio.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="usucapiao">
+          <dt>Usucapião</dt>
+          <dd>Forma de adquirir a propriedade pela posse prolongada de um terreno, nas condições previstas na lei.
+            <span class="fonte">Fonte: <a href="https://sta-informativo.bupi.gov.pt/media/Manual_preparacao_RGG_eletronica-1.pdf">BUPi, Manual de preparação</a></span></dd>
+        </div>
+        <div class="termo" id="validada-com-reserva">
+          <dt>Validada com reserva</dt>
+          <dd>A RGG é aceite, mas com uma ressalva sobre os limites: por exemplo, porque se sobrepõe a um vizinho ou porque os vizinhos ainda não estão identificados.
+            <span class="fonte">Fonte: <a href="https://bupi.gov.pt/pt/perguntas-frequentes">BUPi, Perguntas frequentes</a>; <a href="https://diariodarepublica.pt/dr/detalhe/decreto-regulamentar/8-2026-1172217158">Decreto Regulamentar 8/2026</a></span></dd>
+        </div>
+      </dl>
+      <div class="botoes">
+        <a class="botao" href="perguntas.html">Ver as perguntas frequentes</a>
+      </div>
+    </div>
+  </main>
+
+<!-- rodape -->
+  <footer>
+    <div class="contentor">
+      <p><strong>Terreno em Ordem</strong> é um serviço privado e independente, sem ligação ao Estado nem ao BUPi.
+        Não faz, não valida e não regista a identificação de terrenos.</p>
+      <p>Valores legais verificados em <span data-data-verificacao>novembro de 2026</span>.
+        Informação orientativa: não substitui o atendimento do BUPi ou da câmara municipal.</p>
+      <p class="rodape-links">
+        <a href="sobre.html">Sobre este site</a>
+        <a href="privacidade.html">Privacidade</a>
+        <a href="https://bupi.gov.pt">Site oficial do BUPi</a>
+      </p>
+    </div>
+  </footer>
+  <!-- /rodape -->
+  <script>
+    // Filtro simples: mostra só os termos que contêm o texto escrito.
+    (function () {
+      const n = (t) => t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+      const campo = document.getElementById("filtro-glossario");
+      const termos = [...document.querySelectorAll(".termo")];
+      campo.addEventListener("input", () => {
+        const q = n(campo.value.trim());
+        let visiveis = 0;
+        termos.forEach((t) => {
+          const ver = !q || n(t.textContent).includes(q);
+          t.hidden = !ver;
+          if (ver) visiveis++;
+        });
+        document.getElementById("sem-termos").hidden = visiveis > 0;
+      });
+    })();
+  </script>
+</body>
+</html>

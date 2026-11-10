@@ -10,6 +10,8 @@
   <script src="js/comum.js" defer></script>
 </head>
 <body>
+<!-- cabecalho -->
+  <a class="saltar" href="#conteudo">Saltar para o conteúdo</a>
   <div class="aviso-topo" role="note">
     Serviço privado e independente. Não pertence ao Estado nem ao BUPi.
     Site oficial: <a href="https://bupi.gov.pt">bupi.gov.pt</a>
@@ -29,7 +31,16 @@
       </a>
       <span class="etiqueta-teste">Versão de teste</span>
     </div>
+    <nav class="menu contentor" aria-label="Menu principal">
+      <a href="index.html" aria-current="page">Início</a>
+      <a href="diagnostico.html">Diagnóstico</a>
+      <a href="mapa.html">Mapa</a>
+      <a href="perguntas.html">Perguntas</a>
+      <a href="glossario.html">Glossário</a>
+      <a href="ajuda.html">Pedir ajuda</a>
+    </nav>
   </header>
+  <!-- /cabecalho -->
 
   <section class="destaque">
     <div class="contentor grelha">
@@ -62,8 +73,30 @@
     </div>
   </section>
 
-  <main>
+  <main id="conteudo">
     <div class="contentor">
+      <h2>O que pode fazer aqui</h2>
+      <div class="grelha-3 ferramentas">
+        <a class="cartao cartao-ligacao" href="diagnostico.html">
+          <span class="icone-ferramenta" aria-hidden="true">✓</span>
+          <h3>Diagnóstico do seu caso</h3>
+          <p>6 perguntas simples. No fim, recebe a lista de documentos, os custos e os próximos passos.</p>
+          <span class="seta">Começar →</span>
+        </a>
+        <a class="cartao cartao-ligacao" href="mapa.html">
+          <span class="icone-ferramenta" aria-hidden="true">✏️</span>
+          <h3>Esboço no mapa</h3>
+          <p>Desenhe o terreno sobre a fotografia aérea, veja a área e compare com a caderneta.</p>
+          <span class="seta">Abrir o mapa →</span>
+        </a>
+        <a class="cartao cartao-ligacao" href="perguntas.html">
+          <span class="icone-ferramenta" aria-hidden="true">?</span>
+          <h3>Perguntas frequentes</h3>
+          <p>Heranças, emigrantes, terrenos sem papéis, cartas do BUPi e muito mais.</p>
+          <span class="seta">Ver respostas →</span>
+        </a>
+      </div>
+
       <h2>Como funciona</h2>
       <div class="grelha-3">
         <div class="cartao">
@@ -100,11 +133,20 @@
     </div>
   </main>
 
+<!-- rodape -->
   <footer>
     <div class="contentor">
-      <p>Valores legais verificados em <span data-data-verificacao>novembro de 2026</span>.</p>
-      <p>Informação orientativa: não substitui o atendimento do BUPi ou da câmara municipal.</p>
+      <p><strong>Terreno em Ordem</strong> é um serviço privado e independente, sem ligação ao Estado nem ao BUPi.
+        Não faz, não valida e não regista a identificação de terrenos.</p>
+      <p>Valores legais verificados em <span data-data-verificacao>novembro de 2026</span>.
+        Informação orientativa: não substitui o atendimento do BUPi ou da câmara municipal.</p>
+      <p class="rodape-links">
+        <a href="sobre.html">Sobre este site</a>
+        <a href="privacidade.html">Privacidade</a>
+        <a href="https://bupi.gov.pt">Site oficial do BUPi</a>
+      </p>
     </div>
   </footer>
+  <!-- /rodape -->
 </body>
 </html>

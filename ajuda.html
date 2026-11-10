@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1c2433">
+  <title>Pedir ajuda · Terreno em Ordem (versão de teste)</title>
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/comum.js" defer></script>
+  <script src="js/ajuda.js" defer></script>
+</head>
+<body>
+<!-- cabecalho -->
+  <a class="saltar" href="#conteudo">Saltar para o conteúdo</a>
+  <div class="aviso-topo" role="note">
+    Serviço privado e independente. Não pertence ao Estado nem ao BUPi.
+    Site oficial: <a href="https://bupi.gov.pt">bupi.gov.pt</a>
+  </div>
+
+  <header class="cabecalho">
+    <div class="contentor">
+      <a class="marca" href="index.html">
+        <svg viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#1f3a5f"/>
+          <path d="M9 27 L14 11 L29 9 L32 24 L19 31 Z" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle cx="9" cy="27" r="2.6" fill="#f2a27c"/><circle cx="14" cy="11" r="2.6" fill="#f2a27c"/>
+          <circle cx="29" cy="9" r="2.6" fill="#f2a27c"/><circle cx="32" cy="24" r="2.6" fill="#f2a27c"/>
+          <circle cx="19" cy="31" r="2.6" fill="#f2a27c"/>
+        </svg>
+        Terreno em Ordem
+      </a>
+      <span class="etiqueta-teste">Versão de teste</span>
+    </div>
+    <nav class="menu contentor" aria-label="Menu principal">
+      <a href="index.html">Início</a>
+      <a href="diagnostico.html">Diagnóstico</a>
+      <a href="mapa.html">Mapa</a>
+      <a href="perguntas.html">Perguntas</a>
+      <a href="glossario.html">Glossário</a>
+      <a href="ajuda.html" aria-current="page">Pedir ajuda</a>
+    </nav>
+  </header>
+  <!-- /cabecalho -->
+
+  <main id="conteudo">
+    <div class="contentor contentor-estreito">
+      <h1>Pedir ajuda</h1>
+      <p class="lead-pagina">Deixe o seu contacto e uma descrição curta da situação. Entramos em contacto consigo
+        para o ajudar a preparar o processo.</p>
+
+      <div class="caixa caixa-aviso" role="note">
+        <strong>Versão de teste:</strong> este formulário ainda <strong>não envia</strong> pedidos.
+        Pode experimentá-lo; nada do que escrever sai do seu aparelho.
+      </div>
+
+      <div class="caixa" role="note">
+        <strong>Nunca</strong> lhe pedimos a Chave Móvel Digital, PINs, palavras-passe ou números do
+        Cartão de Cidadão, nem documentos. Não os escreva neste formulário.
+      </div>
+
+      <form id="formulario-ajuda" class="cartao formulario" novalidate>
+        <div class="campo">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" autocomplete="name" required maxlength="80">
+          <p class="erro" id="erro-nome" hidden>Escreva o seu nome.</p>
+        </div>
+
+        <fieldset class="campo">
+          <legend>Como prefere ser contactado?</legend>
+          <div class="escolhas-lado">
+            <label class="opcao-marcar"><input type="radio" name="via" value="telefone" checked> <span>Telefone</span></label>
+            <label class="opcao-marcar"><input type="radio" name="via" value="email"> <span>Email</span></label>
+          </div>
+        </fieldset>
+
+        <div class="campo">
+          <label for="contacto" id="rotulo-contacto">Número de telefone</label>
+          <input type="text" id="contacto" name="contacto" autocomplete="tel" inputmode="tel" required maxlength="80">
+          <p class="erro" id="erro-contacto" hidden>Escreva um contacto válido.</p>
+        </div>
+
+        <div class="campo">
+          <label for="concelho">Concelho do terreno</label>
+          <input type="text" id="concelho" name="concelho" required maxlength="60">
+          <p class="erro" id="erro-concelho" hidden>Escreva o concelho.</p>
+        </div>
+
+        <div class="campo">
+          <label for="situacao">Que situação descreve melhor o seu caso?</label>
+          <select id="situacao" name="situacao" required>
+            <option value="">Escolha uma opção</option>
+            <option>Herança ainda não partilhada</option>
+            <option>Terreno comprado, ainda em nome do vendedor</option>
+            <option>Terreno com vários donos</option>
+            <option>Não tenho papéis do terreno</option>
+            <option>O terreno não está nas Finanças</option>
+            <option>Dúvidas sobre os limites ou problema com vizinhos</option>
+            <option>Recebi uma carta ou notificação</option>
+            <option>Outra situação</option>
+          </select>
+          <p class="erro" id="erro-situacao" hidden>Escolha uma opção.</p>
+        </div>
+
+        <div class="campo">
+          <label for="descricao">Descrição curta</label>
+          <textarea id="descricao" name="descricao" rows="5" maxlength="500"
+                    aria-describedby="ajuda-descricao contador"></textarea>
+          <p id="ajuda-descricao" class="ajuda">Opcional. Não escreva números de documentos, NIF nem senhas.</p>
+          <p id="contador" class="ajuda" aria-live="polite">0 de 500 caracteres</p>
+          <p class="erro" id="aviso-numeros" hidden>Parece ter escrito um número de documento ou de contribuinte.
+            Por segurança, apague-o: não precisamos dele.</p>
+        </div>
+
+        <!-- Campo-armadilha para robôs de spam: as pessoas não o veem. -->
+        <div class="armadilha" aria-hidden="true">
+          <label for="website">Não preencha este campo</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="campo">
+          <label class="opcao-marcar consentimento">
+            <input type="checkbox" id="consentimento" name="consentimento" required>
+            <span>Autorizo que estes dados sejam usados apenas para me contactarem sobre este pedido,
+              como explicado na <a href="privacidade.html">política de privacidade</a>.</span>
+          </label>
+          <p class="erro" id="erro-consentimento" hidden>Para enviarmos o pedido, precisamos da sua autorização.</p>
+        </div>
+
+        <div class="botoes">
+          <button type="submit">Enviar pedido</button>
+        </div>
+      </form>
+
+      <div id="resultado-ajuda" class="cartao" hidden tabindex="-1">
+        <span class="selo selo-info">ℹ Versão de teste</span>
+        <h2>O formulário está correto, mas não foi enviado</h2>
+        <p>Nesta versão de teste, os pedidos ainda não são enviados nem guardados.
+          Nada do que escreveu saiu do seu aparelho.</p>
+        <p>Enquanto isso, pode tratar do processo diretamente num
+          <a href="https://bupi.gov.pt/pt/balcoes-bupi">balcão BUPi</a>.</p>
+        <div class="botoes">
+          <button type="button" class="botao-secundario" id="voltar-formulario">← Voltar ao formulário</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+<!-- rodape -->
+  <footer>
+    <div class="contentor">
+      <p><strong>Terreno em Ordem</strong> é um serviço privado e independente, sem ligação ao Estado nem ao BUPi.
+        Não faz, não valida e não regista a identificação de terrenos.</p>
+      <p>Valores legais verificados em <span data-data-verificacao>novembro de 2026</span>.
+        Informação orientativa: não substitui o atendimento do BUPi ou da câmara municipal.</p>
+      <p class="rodape-links">
+        <a href="sobre.html">Sobre este site</a>
+        <a href="privacidade.html">Privacidade</a>
+        <a href="https://bupi.gov.pt">Site oficial do BUPi</a>
+      </p>
+    </div>
+  </footer>
+  <!-- /rodape -->
+</body>
+</html>
