@@ -395,14 +395,64 @@ function exportarKml() {
   setTimeout(() => URL.revokeObjectURL(a.href), 2000);
 }
 
+// ---------- Abrir um ficheiro KML (lido só no aparelho) ----------
+
+// Devolve os pontos [lat, lng] do primeiro polígono do KML (ou de uma linha, se não houver polígono).
+function lerKml(texto) {
+  const xml = new DOMParser().parseFromString(texto, "application/xml");
+  if (xml.getElementsByTagName("parsererror").length) throw new Error("ficheiro inválido");
+  const procurar = (sel) => {
+    for (const el of xml.getElementsByTagNameNS("*", "coordinates")) {
+      if (el.closest && el.closest(sel)) return el.textContent;
+      // closest() não existe em alguns browsers para XML: subir à mão
+      for (let p = el.parentNode; p; p = p.parentNode) if (p.localName === sel) return el.textContent;
+    }
+    return null;
+  };
+  const coords = procurar("outerBoundaryIs") || procurar("LineString");
+  if (!coords) throw new Error("sem polígono");
+  let pts = coords.trim().split(/\s+/).map((c) => c.split(",").map(Number))
+    .filter((c) => c.length >= 2 && isFinite(c[0]) && isFinite(c[1]))
+    .map(([lng, lat]) => [lat, lng]);
+  const [a, b] = [pts[0], pts[pts.length - 1]];
+  if (pts.length > 1 && a[0] === b[0] && a[1] === b[1]) pts = pts.slice(0, -1); // anel fechado
+  if (pts.length < 3) throw new Error("poucos pontos");
+  if (pts.some(([lat, lng]) => Math.abs(lat) > 90 || Math.abs(lng) > 180)) throw new Error("coordenadas inválidas");
+  return pts;
+}
+
+function abrirKml(ficheiro) {
+  const estado = $("estado-kml");
+  if (!ficheiro) return;
+  if (/\.kmz$/i.test(ficheiro.name)) {
+    estado.textContent = "Os ficheiros KMZ não são suportados. Abra-o no Google Earth e guarde-o como KML.";
+    return;
+  }
+  if (ficheiro.size > 5 * 1024 * 1024) { estado.textContent = "O ficheiro é demasiado grande (máximo 5 MB)."; return; }
+  const leitor = new FileReader();
+  leitor.onload = () => {
+    try {
+      pontos = lerKml(String(leitor.result));
+      modoDesenho(false);
+      atualizar();
+      mapa.fitBounds(L.latLngBounds(pontos), { maxZoom: 18, padding: [30, 30] });
+      estado.textContent = `Ficheiro aberto: ${pontos.length} cantos. Pode acertá-los arrastando-os.`;
+      $("mapa").scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (e) {
+      estado.textContent = "Não foi possível ler um terreno neste ficheiro. Confirme que é um KML com um polígono.";
+    }
+  };
+  leitor.readAsText(ficheiro);
+}
+
 // ---------- Procurar local e GPS ----------
 
 function ligarPesquisa() {
   const campo = $("procurar-local");
   const lista = $("resultados-local");
-  campo.addEventListener("input", () => {
+  Locais.ligarCampo(campo, (encontrados) => {
     lista.innerHTML = "";
-    Locais.procurar(campo.value).slice(0, 6).forEach((r) => {
+    encontrados.slice(0, 6).forEach((r) => {
       const li = document.createElement("li");
       const b = document.createElement("button");
       b.type = "button";
@@ -461,6 +511,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   $("desfazer").addEventListener("click", () => { pontos.pop(); atualizar(); });
   $("apagar").addEventListener("click", () => { pontos = []; atualizar(); modoDesenho(false); });
   $("exportar").addEventListener("click", exportarKml);
+  $("abrir-kml").addEventListener("change", (e) => { abrirKml(e.target.files[0]); e.target.value = ""; });
   $("area-caderneta").addEventListener("input", comparar);
   $("unidade-caderneta").addEventListener("change", comparar);
   $("gps-ir").addEventListener("click", () => irParaPosicao(false));

@@ -419,6 +419,8 @@ footer p { margin: .3em 0; }
 }
 .painel { display: grid; gap: 1rem; }
 .medida-lado { pointer-events: none; }
+.botao-ficheiro { margin-top: .8rem; font-size: 1rem; min-height: 50px; padding: .5em 1em; cursor: pointer; }
+#abrir-kml:focus-visible + .botao-ficheiro { outline: 4px solid var(--foco); outline-offset: 3px; }
 .medida-lado span {
   display: inline-block;
   transform: translate(-50%, -50%);

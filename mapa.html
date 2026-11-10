@@ -121,15 +121,18 @@
           </section>
 
           <section class="cartao passo-mapa">
-            <h2><span class="passo-numero">4</span> Guardar o desenho</h2>
+            <h2><span class="passo-numero">4</span> Guardar ou abrir um desenho</h2>
             <label for="nome-terreno">Nome para o ficheiro (opcional)</label>
             <input type="text" id="nome-terreno" placeholder="Ex.: Pinhal da Ribeira" maxlength="60">
             <div class="botoes botoes-compactos">
               <button type="button" id="exportar">⬇ Descarregar ficheiro KML</button>
             </div>
+            <input type="file" id="abrir-kml" accept=".kml,.kmz,application/vnd.google-earth.kml+xml" class="so-leitor">
+            <label class="botao botao-secundario botao-ficheiro" for="abrir-kml">📂 Abrir um ficheiro KML que já tenho</label>
+            <p id="estado-kml" class="estado" aria-live="polite"></p>
             <p class="ajuda">O ficheiro KML abre no Google Earth e pode ser carregado na plataforma do BUPi
-              como ponto de partida. O desenho fica também guardado neste aparelho (não é enviado para
-              nenhum servidor).</p>
+              como ponto de partida. O desenho fica também guardado neste aparelho. Os ficheiros que abre
+              são lidos só no seu aparelho: não são enviados para nenhum servidor.</p>
           </section>
         </div>
       </div>
