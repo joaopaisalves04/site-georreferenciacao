@@ -1,0 +1,112 @@
+/* Estilo comum a todas as páginas.
+   Pensado para pessoas mais velhas: letra grande, contraste alto, botões grandes. */
+
+:root {
+  --texto: #111;
+  --fundo: #fff;
+  --azul: #0b3d91;
+  --azul-escuro: #072a66;
+  --foco: #ffbf47;
+  --aviso-fundo: #fff3c4;
+  --aviso-borda: #8a6d00;
+  --ok-fundo: #e6f4ea;
+  --ok-borda: #1e6b34;
+  --info-fundo: #e8f0fb;
+  --cinza: #555;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--texto);
+  background: var(--fundo);
+  margin: 0;
+}
+
+.aviso-topo {
+  background: var(--aviso-fundo);
+  border-bottom: 3px solid var(--aviso-borda);
+  padding: 0.8em 1em;
+}
+
+main {
+  max-width: 40em;
+  margin: 0 auto;
+  padding: 1em 1em 3em;
+}
+
+h1 { font-size: 1.6em; line-height: 1.25; }
+h2 { font-size: 1.3em; line-height: 1.3; }
+
+a { color: var(--azul); }
+a:focus, button:focus, input:focus { outline: 4px solid var(--foco); outline-offset: 2px; }
+
+/* Botões */
+.botao, button {
+  display: inline-block;
+  min-height: 52px;
+  padding: 0.6em 1.2em;
+  font: inherit;
+  font-weight: bold;
+  background: var(--azul);
+  color: #fff;
+  border: 2px solid var(--azul);
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.botao:hover, button:hover { background: var(--azul-escuro); }
+.botao-secundario {
+  background: #fff;
+  color: var(--azul);
+}
+.botao-secundario:hover { background: var(--info-fundo); }
+
+/* Campo de texto */
+label { display: block; font-weight: bold; margin-bottom: 0.4em; }
+input[type="text"] {
+  width: 100%;
+  font: inherit;
+  padding: 0.6em;
+  border: 3px solid var(--texto);
+  border-radius: 8px;
+}
+.ajuda { color: var(--cinza); margin-top: 0.3em; }
+
+/* Lista de opções (botões grandes, um por linha) */
+.opcoes { list-style: none; padding: 0; margin: 1em 0; }
+.opcoes li { margin-bottom: 0.6em; }
+.opcoes button {
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  color: var(--texto);
+  border: 3px solid var(--azul);
+}
+.opcoes button:hover { background: var(--info-fundo); }
+.opcoes .local { display: block; font-weight: normal; color: var(--cinza); font-size: 0.9em; }
+
+/* Caixas de resultado */
+.caixa {
+  border-left: 8px solid var(--azul);
+  background: var(--info-fundo);
+  padding: 0.8em 1em;
+  margin: 1em 0;
+}
+.caixa-ok { border-color: var(--ok-borda); background: var(--ok-fundo); }
+.caixa-aviso { border-color: var(--aviso-borda); background: var(--aviso-fundo); }
+
+.fonte { font-size: 0.85em; color: var(--cinza); }
+
+.acoes { display: flex; flex-wrap: wrap; gap: 0.8em; margin-top: 1.5em; }
+
+footer {
+  border-top: 2px solid #ccc;
+  padding: 1em;
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--cinza);
+}

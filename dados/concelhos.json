@@ -1,0 +1,1549 @@
+{
+ "_fontes": {
+  "lista_sem_cadastro_continente": "Lei 65/2019, Anexo I, na redação do DL 90/2023",
+  "lista_sem_cadastro_ilhas": "Lei 65/2019, Anexo II, na redação do DL 87/2026",
+  "nomes_continente": "CAOP 2025, DGT (CC-BY 4.0)"
+ },
+ "concelhos": [
+  {
+   "nome": "Abrantes",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Aguiar da Beira",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Alandroal",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Albergaria-a-Velha",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Albufeira",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Alcanena",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Alcobaça",
+   "local": "distrito de Leiria",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Alcochete",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Alcoutim",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Alcácer do Sal",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Alenquer",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Alfândega da Fé",
+   "local": "distrito de Bragança",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Alijó",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Aljezur",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Aljustrel",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Almada",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Almeida",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Almeirim",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Almodôvar",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Alpiarça",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Alter do Chão",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Alvaiázere",
+   "local": "distrito de Leiria",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Alvito",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Amadora",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Amarante",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Amares",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Anadia",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Angra do Heroísmo",
+   "local": "ilha de Terceira, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Ansião",
+   "local": "distrito de Leiria",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Arcos de Valdevez",
+   "local": "distrito de Viana do Castelo",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Arganil",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Armamar",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Arouca",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Arraiolos",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Arronches",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Arruda dos Vinhos",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Aveiro",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Avis",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Azambuja",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Baião",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Barcelos",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Barrancos",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Barreiro",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Batalha",
+   "local": "distrito de Leiria",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Beja",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Belmonte",
+   "local": "distrito de Castelo Branco",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Benavente",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Bombarral",
+   "local": "distrito de Leiria",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Borba",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Boticas",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Braga",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Bragança",
+   "local": "distrito de Bragança",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Cabeceiras de Basto",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Cadaval",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Caldas da Rainha",
+   "local": "distrito de Leiria",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Calheta",
+   "local": "Madeira",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Calheta",
+   "local": "ilha de São Jorge, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Caminha",
+   "local": "distrito de Viana do Castelo",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Campo Maior",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Cantanhede",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Carrazeda de Ansiães",
+   "local": "distrito de Bragança",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Carregal do Sal",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Cartaxo",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Cascais",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Castanheira de Pêra",
+   "local": "distrito de Leiria",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Castelo Branco",
+   "local": "distrito de Castelo Branco",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Castelo de Paiva",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Castelo de Vide",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Castro Daire",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Castro Marim",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Castro Verde",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Celorico da Beira",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Celorico de Basto",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Chamusca",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Chaves",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Cinfães",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Coimbra",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Condeixa-a-Nova",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Constância",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Coruche",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Corvo",
+   "local": "ilha de Corvo, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Covilhã",
+   "local": "distrito de Castelo Branco",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Crato",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Cuba",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Câmara de Lobos",
+   "local": "Madeira",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Elvas",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Entroncamento",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Espinho",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Esposende",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Estarreja",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Estremoz",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Fafe",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Faro",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Felgueiras",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Ferreira do Alentejo",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Ferreira do Zêzere",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Figueira da Foz",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Figueira de Castelo Rodrigo",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Figueiró dos Vinhos",
+   "local": "distrito de Leiria",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Fornos de Algodres",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Freixo de Espada à Cinta",
+   "local": "distrito de Bragança",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Fronteira",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Funchal",
+   "local": "Madeira",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Fundão",
+   "local": "distrito de Castelo Branco",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Gavião",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Golegã",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Gondomar",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Gouveia",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Grândola",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Guarda",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Guimarães",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Góis",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Horta",
+   "local": "ilha de Faial, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Idanha-a-Nova",
+   "local": "distrito de Castelo Branco",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Lagoa",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Lagoa",
+   "local": "ilha de São Miguel, Açores",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Lagos",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Lajes das Flores",
+   "local": "ilha de Flores, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Lajes do Pico",
+   "local": "ilha de Pico, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Lamego",
+   "local": "distrito de Viseu",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Leiria",
+   "local": "distrito de Leiria",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Lisboa",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Loulé",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Loures",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Lourinhã",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Lousada",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Lousã",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Macedo de Cavaleiros",
+   "local": "distrito de Bragança",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Machico",
+   "local": "Madeira",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Madalena",
+   "local": "ilha de Pico, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Mafra",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Maia",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Mangualde",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Manteigas",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Marco de Canaveses",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Marinha Grande",
+   "local": "distrito de Leiria",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Marvão",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Matosinhos",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Mação",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Mealhada",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Melgaço",
+   "local": "distrito de Viana do Castelo",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Mesão Frio",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Mira",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Miranda do Corvo",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Miranda do Douro",
+   "local": "distrito de Bragança",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Mirandela",
+   "local": "distrito de Bragança",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Mogadouro",
+   "local": "distrito de Bragança",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Moimenta da Beira",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Moita",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Monchique",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Mondim de Basto",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Monforte",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Montalegre",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Montemor-o-Novo",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Montemor-o-Velho",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Montijo",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Monção",
+   "local": "distrito de Viana do Castelo",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Mora",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Mortágua",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Moura",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Mourão",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Murtosa",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Murça",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Mértola",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Mêda",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Nazaré",
+   "local": "distrito de Leiria",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Nelas",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Nisa",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Nordeste",
+   "local": "ilha de São Miguel, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Odemira",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Odivelas",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Oeiras",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Oleiros",
+   "local": "distrito de Castelo Branco",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Olhão",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Oliveira de Azeméis",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Oliveira de Frades",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Oliveira do Bairro",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Oliveira do Hospital",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Ourique",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Ourém",
+   "local": "distrito de Santarém",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Ovar",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Palmela",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Pampilhosa da Serra",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Paredes",
+   "local": "distrito de Porto",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Paredes de Coura",
+   "local": "distrito de Viana do Castelo",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Paços de Ferreira",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Pedrógão Grande",
+   "local": "distrito de Leiria",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Penacova",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Penafiel",
+   "local": "distrito de Porto",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Penalva do Castelo",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Penamacor",
+   "local": "distrito de Castelo Branco",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Penedono",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Penela",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Peniche",
+   "local": "distrito de Leiria",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Peso da Régua",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Pinhel",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Pombal",
+   "local": "distrito de Leiria",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Ponta Delgada",
+   "local": "ilha de São Miguel, Açores",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Ponta do Sol",
+   "local": "Madeira",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Ponte da Barca",
+   "local": "distrito de Viana do Castelo",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Ponte de Lima",
+   "local": "distrito de Viana do Castelo",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Ponte de Sor",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Portalegre",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Portel",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Portimão",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Porto",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Porto Moniz",
+   "local": "Madeira",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Porto Santo",
+   "local": "ilha de Porto Santo, Madeira",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Porto de Mós",
+   "local": "distrito de Leiria",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Povoação",
+   "local": "ilha de São Miguel, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Praia da Vitória",
+   "local": "ilha de Terceira, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Proença-a-Nova",
+   "local": "distrito de Castelo Branco",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Póvoa de Lanhoso",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Póvoa de Varzim",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Redondo",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Reguengos de Monsaraz",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Resende",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Ribeira Brava",
+   "local": "Madeira",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Ribeira Grande",
+   "local": "ilha de São Miguel, Açores",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Ribeira de Pena",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Rio Maior",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Sabrosa",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Sabugal",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Salvaterra de Magos",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Santa Comba Dão",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Santa Cruz",
+   "local": "Madeira",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Santa Cruz da Graciosa",
+   "local": "ilha de Graciosa, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Santa Cruz das Flores",
+   "local": "ilha de Flores, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Santa Maria da Feira",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Santa Marta de Penaguião",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Santana",
+   "local": "Madeira",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Santarém",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Santiago do Cacém",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Santo Tirso",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Sardoal",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Seia",
+   "local": "distrito de Guarda",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Seixal",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Sernancelhe",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Serpa",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Sertã",
+   "local": "distrito de Castelo Branco",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Sesimbra",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Setúbal",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Sever do Vouga",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Silves",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Sines",
+   "local": "distrito de Setúbal",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Sintra",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Sobral de Monte Agraço",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Soure",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Sousel",
+   "local": "distrito de Portalegre",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Sátão",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "São Brás de Alportel",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "São João da Madeira",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "São João da Pesqueira",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "São Pedro do Sul",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "São Roque do Pico",
+   "local": "ilha de Pico, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "São Vicente",
+   "local": "Madeira",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Tabuaço",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Tarouca",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Tavira",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Terras de Bouro",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Tomar",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Tondela",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Torre de Moncorvo",
+   "local": "distrito de Bragança",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Torres Novas",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Torres Vedras",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Trancoso",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Trofa",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Tábua",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vagos",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vale de Cambra",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Valença",
+   "local": "distrito de Viana do Castelo",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Valongo",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Valpaços",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Velas",
+   "local": "ilha de São Jorge, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vendas Novas",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Viana do Alentejo",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Viana do Castelo",
+   "local": "distrito de Viana do Castelo",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vidigueira",
+   "local": "distrito de Beja",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Vieira do Minho",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila Flor",
+   "local": "distrito de Bragança",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila Franca de Xira",
+   "local": "distrito de Lisboa",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Vila Franca do Campo",
+   "local": "ilha de São Miguel, Açores",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Vila Nova da Barquinha",
+   "local": "distrito de Santarém",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Vila Nova de Cerveira",
+   "local": "distrito de Viana do Castelo",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila Nova de Famalicão",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila Nova de Foz Côa",
+   "local": "distrito de Guarda",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila Nova de Gaia",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila Nova de Paiva",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila Nova de Poiares",
+   "local": "distrito de Coimbra",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila Pouca de Aguiar",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila Real",
+   "local": "distrito de Vila Real",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila Real de Santo António",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Vila Velha de Ródão",
+   "local": "distrito de Castelo Branco",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Vila Verde",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila Viçosa",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Vila de Rei",
+   "local": "distrito de Castelo Branco",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila do Bispo",
+   "local": "distrito de Faro",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Vila do Conde",
+   "local": "distrito de Porto",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vila do Porto",
+   "local": "ilha de Santa Maria, Açores",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vimioso",
+   "local": "distrito de Bragança",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vinhais",
+   "local": "distrito de Bragança",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Viseu",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vizela",
+   "local": "distrito de Braga",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Vouzela",
+   "local": "distrito de Viseu",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Águeda",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Évora",
+   "local": "distrito de Évora",
+   "sem_cadastro": false
+  },
+  {
+   "nome": "Ílhavo",
+   "local": "distrito de Aveiro",
+   "sem_cadastro": true
+  },
+  {
+   "nome": "Óbidos",
+   "local": "distrito de Leiria",
+   "sem_cadastro": false
+  }
+ ]
+}

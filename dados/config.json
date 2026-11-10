@@ -1,0 +1,16 @@
+{
+  "_leia_me": "ÚNICO sítio com valores legais (custos e prazos). Ao rever os valores, atualize também data_verificacao. As fontes estão em docs/conhecimento-bupi.md (secções 6 e 7).",
+  "data_verificacao": "2026-11-09",
+  "valores": {
+    "rgg_online":                 { "valor": 0,    "unidade": "euro", "fonte": "bupi.gov.pt, Perguntas frequentes e Passo a passo" },
+    "rgg_balcao_ate_9":           { "valor": 15,   "unidade": "euro", "fonte": "Lei 65/2019, art. 14.º, n.º 7, al. a) (redação do DL 87/2026)" },
+    "rgg_balcao_desde_10":        { "valor": 10,   "unidade": "euro", "fonte": "Lei 65/2019, art. 14.º, n.º 7, al. b) (redação do DL 87/2026)" },
+    "proc_especial_registo":      { "valor": 250,  "unidade": "euro", "fonte": "Regulamento Emolumentar (RERN), art. 21.º, n.º 23 (redação do DL 87/2026)" },
+    "proc_especial_justificacao": { "valor": 200,  "unidade": "euro", "fonte": "RERN, art. 21.º, n.º 22 (redação do DL 87/2026)" },
+    "por_predio_adicional":       { "valor": 50,   "unidade": "euro", "fonte": "RERN, art. 21.º, n.ºs 22 e 23" },
+    "oposicao_justificacao":      { "valor": 100,  "unidade": "euro", "fonte": "RERN, art. 21.º, n.º 22" },
+    "reducao_rustico_lt_10000":   { "valor": 0.65, "unidade": "percentagem", "fonte": "RERN, art. 28.º, n.º 33 (redação do DL 87/2026)" },
+    "prazo_validacao":            { "valor": 20,   "unidade": "dias_uteis", "fonte": "Decreto Regulamentar 9-A/2017, art. 3.º, n.º 4 (redação do DR 8/2026)" },
+    "prazo_correcao":             { "valor": 20,   "unidade": "dias_uteis", "fonte": "Decreto Regulamentar 9-A/2017, art. 3.º, n.º 5 (redação do DR 8/2026)" }
+  }
+}
