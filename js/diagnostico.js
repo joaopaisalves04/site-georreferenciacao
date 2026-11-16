@@ -77,23 +77,89 @@ function botaoVoltar() {
 
 // ---------- Navegação ----------
 
-function irPara(i) {
-  indice = i;
-  const p = regras.perguntas[i];
-  if (p.tipo === "concelho") perguntaConcelho(p);
-  else if (p.tipo === "escolha") perguntaEscolha(p);
-  else if (p.tipo === "varias") perguntaVarias(p);
+// Cada ecrã (pergunta, resultado, etc.) fica no histórico do browser, para o botão
+// "andar para trás" do telemóvel voltar à pergunta anterior em vez de sair da página.
+// Um ecrã descreve-se assim: { tipo: "pergunta" | "resultado" | "sem_bupi" | "fim", i, fim }.
+// As respostas ficam também na sessão do browser (apagam-se ao fechar o separador),
+// para não se perderem ao atualizar a página ou ao ir ao mapa e voltar.
+
+const CHAVE_SESSAO = "diagnostico-v1";
+const ecraPergunta = (i) => ({ tipo: "pergunta", i });
+const ecraResultado = () => ({ tipo: "resultado", i: regras.perguntas.length });
+
+function guardarSessao() {
+  try {
+    const c = respostas.concelho;
+    sessionStorage.setItem(CHAVE_SESSAO, JSON.stringify({ ...respostas, concelho: c ? { nome: c.nome, local: c.local } : null }));
+  } catch (e) { /* sem espaço ou bloqueado */ }
+}
+
+function recuperarSessao() {
+  try {
+    const g = JSON.parse(sessionStorage.getItem(CHAVE_SESSAO) || "null");
+    if (!g || typeof g !== "object") return false;
+    const c = g.concelho ? Locais.concelhoDe(g.concelho.nome, g.concelho.local) : null;
+    Object.assign(respostas, g, { concelho: c });
+    if (!c) delete respostas.concelho;
+    return true;
+  } catch (e) { return false; }
+}
+
+function limparRespostas() {
+  Object.keys(respostas).forEach((k) => delete respostas[k]);
+}
+
+// O ecrã pode ser mostrado com as respostas que existem neste momento?
+function valido(est) {
+  const total = regras.perguntas.length;
+  if (!est || !Number.isInteger(est.i) || est.i < 0 || est.i > total) return false;
+  const respondidas = (ate) => regras.perguntas.slice(0, ate).every((p) => respostas[p.id] !== undefined);
+  if (est.tipo === "pergunta") return est.i < total && respondidas(est.i);
+  if (est.tipo === "resultado") return respondidas(total) && respostas.concelho.sem_cadastro && respostas.tipo !== "urbano";
+  if (est.tipo === "sem_bupi") return !!respostas.concelho;
+  if (est.tipo === "fim") return !!regras.fins[est.fim];
+  return false;
+}
+
+function desenhar(est) {
+  if (!valido(est)) est = ecraPergunta(0);
+  indice = est.i;
+  if (est.tipo === "resultado") mostrarResultado();
+  else if (est.tipo === "sem_bupi") mostrarSemBupi();
+  else if (est.tipo === "fim") mostrarFim(regras.fins[est.fim]);
+  else {
+    const p = regras.perguntas[est.i];
+    if (p.tipo === "concelho") perguntaConcelho(p);
+    else if (p.tipo === "escolha") perguntaEscolha(p);
+    else if (p.tipo === "varias") perguntaVarias(p);
+  }
+  guardarSessao();
+}
+
+// Avança para um ecrã novo (fica no histórico).
+function ir(est) {
+  const h = history.state;
+  const ant = h && h.tipo ? { tipo: h.tipo, i: h.i } : null;
+  history.pushState({ ...est, ant }, "", location.pathname + location.search);
+  desenhar(est);
+}
+
+// Botões «Voltar» da página: se o ecrã anterior do histórico for o pretendido,
+// anda para trás no histórico (igual ao botão do telemóvel); senão, abre-o.
+function recuar(est) {
+  const ant = history.state && history.state.ant;
+  if (ant && ant.tipo === est.tipo && ant.i === est.i) history.back();
+  else ir(est);
 }
 
 function seguinte() {
-  if (indice + 1 < regras.perguntas.length) irPara(indice + 1);
-  else mostrarResultado();
+  if (indice + 1 < regras.perguntas.length) ir(ecraPergunta(indice + 1));
+  else ir(ecraResultado());
 }
 
-function voltar() {
-  if (indice === 0 && !respostas.concelho) window.location.href = "index.html";
-  else irPara(indice);
-}
+window.addEventListener("popstate", (e) => {
+  if (regras && e.state && e.state.tipo) desenhar(e.state);
+});
 
 // ---------- Pergunta: concelho ----------
 
@@ -142,8 +208,12 @@ function fonteConcelho(c) {
 
 function escolherConcelho(c) {
   respostas.concelho = c;
-  if (c.sem_cadastro) { seguinte(); return; }
+  if (c.sem_cadastro) seguinte();
+  else ir({ tipo: "sem_bupi", i: 0 });
+}
 
+function mostrarSemBupi() {
+  const c = respostas.concelho;
   const f = fonteConcelho(c);
   mostrar(`
     <span class="selo selo-info">ℹ Resultado</span>
@@ -189,7 +259,7 @@ function perguntaEscolha(p) {
     b.addEventListener("click", () => {
       const o = p.opcoes.find((x) => x.id === b.dataset.opcao);
       respostas[p.id] = o.id;
-      if (o.fim) mostrarFim(regras.fins[o.fim]);
+      if (o.fim) ir({ tipo: "fim", i: indice, fim: o.fim });
       else seguinte();
     });
   });
@@ -432,17 +502,16 @@ async function partilharPlano() {
 
 document.addEventListener("click", (e) => {
   const acao = e.target.closest("[data-acao]")?.dataset.acao;
-  if (acao === "voltar") voltar();
+  if (acao === "voltar") recuar(ecraPergunta(indice));
   else if (acao === "anterior") {
     if (indice === 0) window.location.href = "index.html";
-    else irPara(indice - 1);
+    else recuar(ecraPergunta(indice - 1));
   }
   else if (acao === "imprimir") window.print();
   else if (acao === "partilhar") partilharPlano();
   else if (acao === "recomecar") {
-    Object.keys(respostas).forEach((k) => delete respostas[k]);
-    if (location.hash) history.replaceState(null, "", location.pathname);
-    irPara(0);
+    limparRespostas();
+    ir(ecraPergunta(0));
   }
 });
 
@@ -461,6 +530,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error(e);
     return;
   }
-  if (lerLinkDoPlano()) mostrarResultado();
-  else irPara(0);
+  // Três maneiras de chegar aqui: a voltar a esta página (atualizar, ou regressar do mapa),
+  // por um link de plano enviado por alguém, ou a começar do princípio.
+  const h = history.state;
+  let est;
+  if (h && h.tipo && recuperarSessao() && valido(h)) est = h;
+  else {
+    limparRespostas();
+    est = lerLinkDoPlano() ? ecraResultado() : ecraPergunta(0);
+  }
+  history.replaceState({ ...est, ant: est.ant || null }, "");
+  try {
+    desenhar(est);
+  } catch (e) {
+    console.error(e);
+    limparRespostas();
+    desenhar(ecraPergunta(0));
+  }
 });
